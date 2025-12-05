@@ -9,7 +9,7 @@ class AdminAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('admin.login');
+        return view('admin.auth.login');
     }
 
     public function login(Request $request)
@@ -49,6 +49,6 @@ class AdminAuthController extends Controller
     public function logout()
     {
         session()->flush();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.auth.login');
     }
 }
