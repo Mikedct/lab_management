@@ -362,7 +362,7 @@
         </form>
 
         <div class="footer-text">
-            orang Ganteng yang buat
+            dibuat dengan cinta
         </div>
     </div>
 </div>

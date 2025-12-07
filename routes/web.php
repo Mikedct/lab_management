@@ -1,24 +1,40 @@
 <?php
+// routes/web.php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\KomputerController;
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\Admin\DashboardController;
 
-Route::get('/', [App\Http\Controllers\AdminAuthController::class, 'showLoginForm']);
-
-Route::get('/loginadmin', [AdminAuthController::class, 'showLoginForm'])->name('admin.auth.login');
-Route::post('/loginadmin', [AdminAuthController::class, 'login'])->name('admin.login.post');
-
-Route::middleware('admin.auth')->group(function () {
-    Route::get('/admin/dashboard', [KomputerController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+// Redirect root ke login
+Route::get('/', function () {
+    return redirect()->route('admin.auth.login');
 });
 
-Route::get('/admin/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
-
+// ============================================
+// AUTH ROUTES (Tanpa Middleware)
+// ============================================
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('auth.login');
+    Route::post('login', [AdminLoginController::class, 'login'])->name('login.post');
+});
+
+// ============================================
+// PROTECTED ADMIN ROUTES (Dengan Middleware)
+// ============================================
+Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
+    
+    // Dashboard
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // Logout
+    Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
+    
+    // User Management (uncomment when ready)
+    // Route::resource('users', UserController::class);
+    
+    // Schedule Management (uncomment when ready)
+    // Route::resource('schedules', ScheduleController::class);
+    
+    // Lab Monitoring (uncomment when ready)
+    // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
 });

@@ -5,7 +5,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f6fa;
+            background: #b72024;
             padding: 20px;
         }
         h2 {
@@ -21,7 +21,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         table thead {
-            background: #2c3e50;
+            background: #b72024;
             color: #fff;
         }
         table th, table td {

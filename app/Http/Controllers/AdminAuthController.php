@@ -43,7 +43,7 @@ class AdminAuthController extends Controller
     public function dashboard()
     {
         $komputers = DB::table('komputer')->get();
-        return view('admin.dashboard', compact('komputers'));
+        return view('admin.dashboard', compact('dashboard'));
     }
 
     public function logout()
