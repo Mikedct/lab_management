@@ -27,7 +27,7 @@ class UserController extends Controller
     // Tampilkan form create
     public function create()
     {
-        return view('admin.dashboard.users.create');
+        return view('admin.users.create');
     }
 
     // Simpan user baru
@@ -61,7 +61,7 @@ class UserController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('admin.dashboard.users.index')
+        return redirect()->route('admin.users.index')
                          ->with('success', 'User berhasil ditambahkan!');
     }
 
@@ -71,7 +71,7 @@ class UserController extends Controller
         $user = DB::table('users')->where('userID', $id)->first();
 
         if (!$user) {
-            return redirect()->route('admin.dashboard.users.index')
+            return redirect()->route('admin.users.index')
                            ->with('error', 'User tidak ditemukan');
         }
 
@@ -84,7 +84,7 @@ class UserController extends Controller
         $user = DB::table('users')->where('userID', $id)->first();
 
         if (!$user) {
-            return redirect()->route('admin.dashboard.users.index')
+            return redirect()->route('admin.users.index')
                            ->with('error', 'User tidak ditemukan');
         }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
             ->where('userID', $id)
             ->update($updateData);
 
-        return redirect()->route('admin.dashboard.users.index')
+        return redirect()->route('admin.users.index')
                          ->with('success', 'User berhasil diupdate!');
     }
 
@@ -130,7 +130,7 @@ class UserController extends Controller
     {
         DB::table('users')->where('userID', $id)->delete();
 
-        return redirect()->route('admin.dashboard.users.index')
+        return redirect()->route('admin.users.index')
                          ->with('success', 'User berhasil dihapus!');
     }
 }

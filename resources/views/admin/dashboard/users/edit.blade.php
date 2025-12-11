@@ -94,7 +94,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: rgba(255,255,255,0.8);">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard.users.index') }}" style="color: rgba(255,255,255,0.8);">Users</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}" style="color: rgba(255,255,255,0.8);">Users</a></li>
                     <li class="breadcrumb-item active" style="color: white;">Edit User</li>
                 </ol>
             </nav>
@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="form-card">
-                    <form action="{{ route('admin.dashboard.users.update', $user->userID) }}" method="POST">
+                    <form action="{{ route('admin.users.update', $user->userID) }}" method="POST">
                         @csrf
                         @method('PUT')
                         
@@ -233,7 +233,7 @@
                         <hr class="my-4">
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.dashboard.users.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left me-1"></i> Kembali
                             </a>
                             <button type="submit" class="btn btn-submit">
