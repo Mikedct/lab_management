@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LabController;
+use App\Http\Controllers\Admin\ComputerController;
 
 // Redirect root ke login
 Route::get('/', function () {
@@ -24,10 +25,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // PROTECTED ADMIN ROUTES (Dengan Middleware)
 // ============================================
 Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
-    
+
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // User Management - Resource Route (CRUD lengkap)
     Route::resource('users', UserController::class);
 
@@ -36,15 +37,28 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
 
     Route::resource('lab', LabController::class);
 
+    // Nested route untuk komputer dalam lab
+    Route::prefix('lab/{labID}')->group(function () {
+        Route::get('computer/create', [ComputerController::class, 'create'])->name('computer.create');
+        Route::post('computer', [ComputerController::class, 'store'])->name('computer.store');
+        Route::get('computer/{computerID}/edit', [ComputerController::class, 'edit'])->name('computer.edit');
+        Route::put('computer/{computerID}', [ComputerController::class, 'update'])->name('computer.update');
+        Route::delete('computer/{computerID}', [ComputerController::class, 'destroy'])->name('computer.destroy');
+    });
+
+
+    // Simpan komputer baru
+    Route::post('lab/{lab}/computer', [LabController::class, 'storeComputer'])->name('admin.computer.store');
+
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
-    
+
     // User Management (uncomment when ready)
     // Route::resource('users', UserController::class);
-    
+
     // Schedule Management (uncomment when ready)
     // Route::resource('schedules', ScheduleController::class);
-    
+
     // Lab Monitoring (uncomment when ready)
     // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
 

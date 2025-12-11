@@ -173,9 +173,10 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                        <a href="{{ route('admin.lab.index') }}" class="btn btn-light">
-                            <i class="bi bi-arrow-left-circle me-1"></i> Kembali
+                        <a href="{{ route('admin.computer.create', $lab->labID) }}" class="btn btn-primary">
+                            <i class="bi bi-plus-circle me-1"></i> Tambah Komputer
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -218,6 +219,7 @@
                                     <th>CPU</th>
                                     <th>GPU</th>
                                     <th>RAM (GB)</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -274,6 +276,28 @@
                                             @endif
                                         </td>
                                         <td>{{ $comp->RAM }}</td>
+                                        <td class="d-flex gap-2">
+
+                                            {{-- Tombol Edit --}}
+                                            <a href="{{ route('admin.computer.edit', [$lab->labID, $comp->computerID]) }}"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+
+                                            {{-- Tombol Delete --}}
+                                            <form
+                                                action="{{ route('admin.computer.destroy', [$lab->labID, $comp->computerID]) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus komputer ini?');">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </button>
+                                            </form>
+
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
