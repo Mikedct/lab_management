@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LabController;
 
 // Redirect root ke login
 Route::get('/', function () {
@@ -41,4 +42,6 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     
     // Lab Monitoring (uncomment when ready)
     // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
+
+    Route::get('lab', [LabController::class, 'index'])->name('lab.index');
 });
