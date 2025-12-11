@@ -27,7 +27,7 @@ class UserController extends Controller
     // Tampilkan form create
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.dashboard.users.create');
     }
 
     // Simpan user baru
