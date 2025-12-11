@@ -330,7 +330,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <h5 class="mb-0">
-                                <i class="bi bi-list-ul me-2"></i>Daftar Users
+                                <i class="bi bi-list-ul me-2"></i>Daftar Lab
                             </h5>
                         </div>
                     </div>

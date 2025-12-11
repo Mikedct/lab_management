@@ -330,7 +330,7 @@
 
                 <!-- Lab Computer Status -->
                 <div class="col-md-4">
-                    <a href="#" class="menu-card lab" onclick="alert('Fitur dalam pengembangan'); return false;">
+                    <a href="{{ route('admin.lab.index') }}" class="menu-card lab">
                         <div class="menu-icon">
                             <i class="bi bi-pc-display-horizontal"></i>
                         </div>
