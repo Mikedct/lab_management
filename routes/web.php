@@ -31,6 +31,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // User Management - Resource Route (CRUD lengkap)
     Route::resource('users', UserController::class);
 
+    // User Management - Resource Route (CRUD lengkap)
+    Route::resource('schedule', UserController::class);
+
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     
