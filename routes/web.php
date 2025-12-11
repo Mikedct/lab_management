@@ -2,7 +2,7 @@
 // routes/web.php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController;
 
 // Redirect root ke login
