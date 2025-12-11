@@ -1,4 +1,4 @@
-<!-- resources/views/admin/lab/index.blade.php -->
+<!-- resources/views/admin/lab/show.blade.php -->
 
 <!DOCTYPE html>
 <html lang="id">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Lab Monitoring - Lab Management</title>
+    <title>Lab Detail - {{ $lab->labName }}</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -55,62 +55,6 @@
 
         .breadcrumb-item.active {
             color: white;
-        }
-
-        /* Stats Cards */
-        .stats-row {
-            margin-bottom: 30px;
-        }
-
-        .stat-card-small {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .stat-card-small:hover {
-            transform: translateY(-3px);
-        }
-
-        .stat-icon-small {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: white;
-            margin-right: 15px;
-        }
-
-        .stat-icon-small.purple {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .stat-icon-small.green {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
-
-        .stat-icon-small.red {
-            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
-        }
-
-        .stat-content-small h4 {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-            color: #333;
-        }
-
-        .stat-content-small p {
-            margin: 0;
-            color: #666;
-            font-size: 13px;
         }
 
         /* Table Card */
@@ -162,10 +106,10 @@
             border-bottom: none;
         }
 
-
-        .btn-action {
-            padding: 6px 10px;
-            font-size: 13px;
+        .badge {
+            padding: 6px 12px;
+            font-weight: 500;
+            font-size: 12px;
         }
 
         .btn-primary {
@@ -198,24 +142,6 @@
             color: #999;
             font-size: 14px;
         }
-
-        /* Search and Filter */
-        .search-box {
-            max-width: 300px;
-        }
-
-        .search-box .form-control {
-            border-radius: 8px;
-            padding-left: 40px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-        }
     </style>
 </head>
 
@@ -231,50 +157,25 @@
                     <div class="col-md-6">
                         <div class="header-content">
                             <h2>
-                                <i class="bi bi-people-fill me-2"></i>Lab Monitoring
+                                <i class="bi bi-pc-display me-2"></i>Lab: {{ $lab->labName }}
                             </h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
                                         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Labs</li>
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('admin.lab.index') }}">Labs</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ $lab->labName }}</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
-                    <!-- <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-light">
-                                <i class="bi bi-plus-circle me-1"></i> Tambah User Baru
-                            </a>
-                        </div> -->
-                </div>
-            </div>
-        </div>
-
-        <!-- Statistics -->
-        <div class="container stats-row">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="stat-card-small">
-                        <div class="stat-icon-small purple">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <div class="stat-content-small">
-                            <h4>{{ $totalLabs }}</h4>
-                            <p>Total Labs</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card-small">
-                        <div class="stat-icon-small green">
-                            <i class="bi bi-check-circle"></i>
-                        </div>
-                        <div class="stat-content-small">
-                            <h4>{{ $totalPC }}</h4>
-                            <p>Total PCs</p>
-                        </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                        <a href="{{ route('admin.lab.index') }}" class="btn btn-light">
+                            <i class="bi bi-arrow-left-circle me-1"></i> Kembali
+                        </a>
                     </div>
                 </div>
             </div>
@@ -300,53 +201,92 @@
 
             <div class="table-card">
                 <div class="table-card-header">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <h5 class="mb-0">
-                                <i class="bi bi-list-ul me-2"></i>Daftar Lab
-                            </h5>
-                        </div>
-                    </div>
+                    <h5 class="mb-0">
+                        <i class="bi bi-list-ul me-2"></i>Daftar Komputer
+                    </h5>
                 </div>
-
-                <!-- Tabel Lab -->
-
                 <div class="table-card-body">
                     <div class="table-responsive">
-                        <table class="table" id="labstable">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Lab Name</th>
-                                    <th>PC Count</th>
-                                    <th>Aksi</th>
+                                    <th>Computer Name</th>
+                                    <th>Status</th>
+                                    <th>Storage (GB)</th>
+                                    <th>OS</th>
+                                    <th>CPU</th>
+                                    <th>GPU</th>
+                                    <th>RAM (GB)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($labs as $index => $lab)
+                                @forelse ($computers as $index => $comp)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $lab->labName }}</td>
-                                        <td>{{ $lab->pcCount }}</td>
+                                        <td>{{ $comp->computerName }}</td>
                                         <td>
-                                            <a href="{{ route('admin.lab.show', $lab->labID) }}"
-                                                class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pc-display"></i> Komputer
-                                            </a>
+                                            @if($comp->status == 'Active')
+                                                <span class="badge bg-success">Active</span>
+                                            @else
+                                                <span class="badge bg-secondary">Inactive</span>
+                                            @endif
                                         </td>
+                                        <td>{{ $comp->storage }}</td>
+                                        <td>
+                                            @if(str_contains(strtolower($comp->OS), 'windows'))
+                                                <span class="badge bg-primary">
+                                                    <i class="bi bi-windows me-1"></i>{{ $comp->OS }}</span>
+                                            @elseif(str_contains(strtolower($comp->OS), 'linux'))
+                                                <span class="badge bg-warning text-dark">
+                                                    <i class="bi bi-ubuntu me-1"></i>{{ $comp->OS }}</span>
+                                            @elseif(str_contains(strtolower($comp->OS), 'mac'))
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="bi bi-apple me-1"></i>{{ $comp->OS }}</span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $comp->OS }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(str_contains(strtolower($comp->CPU), 'intel'))
+                                                <span class="badge bg-primary">
+                                                    <i class="bi bi-cpu me-1"></i>{{ $comp->CPU }}</span>
+                                            @elseif(str_contains(strtolower($comp->CPU), 'amd'))
+                                                <span class="badge bg-warning text-dark">
+                                                    <i class="bi bi-amd me-1"></i>{{ $comp->CPU }}
+                                                </span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $comp->CPU }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(str_contains(strtolower($comp->GPU), 'intel'))
+                                                <span class="badge bg-primary">
+                                                    <i class="bi bi-cpu me-1"></i>{{ $comp->GPU }}</span>
+                                            @elseif(str_contains(strtolower($comp->GPU), 'amd'))
+                                                <span class="badge bg-danger">
+                                                    <i class="bi bi-amd me-1"></i>{{ $comp->GPU }}</span>
+                                            @elseif(str_contains(strtolower($comp->GPU), 'nvidia'))
+                                                <span class="badge bg-success">
+                                                    <i class="bi bi-nvidia me-1"></i>{{ $comp->GPU }}</span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $comp->GPU }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $comp->RAM }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center text-muted">Belum ada data lab</td>
+                                        <td colspan="8" class="text-center text-muted">Belum ada komputer di lab ini</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
 
+        </div>
 </body>
 
 </html>

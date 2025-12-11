@@ -34,6 +34,8 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // User Management - Resource Route (CRUD lengkap)
     Route::resource('schedule', UserController::class);
 
+    Route::resource('lab', LabController::class);
+
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     
@@ -46,5 +48,5 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Lab Monitoring (uncomment when ready)
     // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
 
-    Route::get('lab', [LabController::class, 'index'])->name('lab.index');
+    // Route::get('lab', [LabController::class, 'index'])->name('lab.index');
 });
