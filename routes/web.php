@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
 
 // Redirect root ke login
 Route::get('/', function () {
@@ -26,6 +27,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
+    // User Management - Resource Route (CRUD lengkap)
+    Route::resource('users', UserController::class);
+
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
     

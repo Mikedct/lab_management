@@ -295,7 +295,56 @@
                 Menu Utama
             </h4>
 
+            <div class="row g-4">
+                <!-- User Management -->
+                <div class="col-md-4">
+                    <a href="{{ route('admin.users.index') }}" class="menu-card users">
+                        <div class="menu-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h5 class="menu-title">User Management</h5>
+                        <p class="menu-description">
+                            Kelola data pengguna, tambah, edit, dan hapus user sistem
+                        </p>
+                        <span class="menu-badge">
+                            <i class="bi bi-person-plus me-1"></i>CRUD Users
+                        </span>
+                    </a>
+                </div>
 
+                <!-- Schedule Management -->
+                <div class="col-md-4">
+                    <a href="#" class="menu-card schedule" onclick="alert('Fitur dalam pengembangan'); return false;">
+                        <div class="menu-icon">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <h5 class="menu-title">Schedule Lab</h5>
+                        <p class="menu-description">
+                            Atur jadwal penggunaan lab, reservasi, dan ketersediaan
+                        </p>
+                        <span class="menu-badge">
+                            <i class="bi bi-calendar-plus me-1"></i>CRUD Jadwal
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Lab Computer Status -->
+                <div class="col-md-4">
+                    <a href="#" class="menu-card lab" onclick="alert('Fitur dalam pengembangan'); return false;">
+                        <div class="menu-icon">
+                            <i class="bi bi-pc-display-horizontal"></i>
+                        </div>
+                        <h5 class="menu-title">Lab Monitoring</h5>
+                        <p class="menu-description">
+                            Monitor kondisi PC lab, status, spesifikasi, dan maintenance
+                        </p>
+                        <span class="menu-badge">
+                            <i class="bi bi-eye me-1"></i>View Status PC
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Quick Actions -->
         <div class="container mb-5">
@@ -306,10 +355,10 @@
             
             <div class="row g-3">
                 <div class="col-md-3 col-sm-6">
-                    <button class="btn btn-outline-primary w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-outline-primary w-100 py-3 text-decoration-none">
                         <i class="bi bi-person-plus-fill d-block mb-2" style="font-size: 24px;"></i>
                         Tambah User Baru
-                    </button>
+                    </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <button class="btn btn-outline-success w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
