@@ -2,17 +2,18 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Lab Monitoring - Lab Management</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
+
     <style>
         body {
             background-color: #f8f9fa;
@@ -87,9 +88,17 @@
             margin-right: 15px;
         }
 
-        .stat-icon-small.purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .stat-icon-small.green { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-        .stat-icon-small.red { background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); }
+        .stat-icon-small.purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-icon-small.green {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .stat-icon-small.red {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+        }
 
         .stat-content-small h4 {
             font-size: 24px;
@@ -153,42 +162,6 @@
             border-bottom: none;
         }
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 12px;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .user-details h6 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .user-details p {
-            margin: 0;
-            font-size: 12px;
-            color: #999;
-        }
-
-        .badge {
-            padding: 6px 12px;
-            font-weight: 500;
-            font-size: 12px;
-        }
 
         .btn-action {
             padding: 6px 10px;
@@ -271,10 +244,10 @@
                         </div>
                     </div>
                     <!-- <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-light">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah User Baru
-                        </a>
-                    </div> -->
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-light">
+                                <i class="bi bi-plus-circle me-1"></i> Tambah User Baru
+                            </a>
+                        </div> -->
                 </div>
             </div>
         </div>
@@ -308,7 +281,7 @@
         </div>
 
         <div class="container mb-5">
-        <!-- Success/Error Messages -->
+            <!-- Success/Error Messages -->
             @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-2"></i>
@@ -325,7 +298,7 @@
                 </div>
             @endif
 
-        <div class="table-card">
+            <div class="table-card">
                 <div class="table-card-header">
                     <div class="row align-items-center">
                         <div class="col-md-6">
@@ -336,36 +309,44 @@
                     </div>
                 </div>
 
-        <!-- Tabel Lab -->
+                <!-- Tabel Lab -->
 
-            <div class="table-card-body">
-                <div class="table-responsive">
-                    <table class="table" id="labstable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Lab Name</th>
-                                <th>PC Count</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($labs as $index => $lab)
+                <div class="table-card-body">
+                    <div class="table-responsive">
+                        <table class="table" id="labstable">
+                            <thead>
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $lab->labName }}</td>
-                                    <td>{{ $lab->pcCount }}</td>
+                                    <th>No</th>
+                                    <th>Lab Name</th>
+                                    <th>PC Count</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted">Belum ada data lab</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @forelse ($labs as $index => $lab)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $lab->labName }}</td>
+                                        <td>{{ $lab->pcCount }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.lab.show', $lab->labID) }}"
+                                                class="btn btn-primary btn-sm">
+                                                <i class="bi bi-pc-display"></i> Komputer
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">Belum ada data lab</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-
             </div>
-    </div>
 
 </body>
+
 </html>
