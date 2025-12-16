@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LabController;
 use App\Http\Controllers\Admin\ComputerController;
+use App\Http\Controllers\Admin\ScheduleController;
 
 // Redirect root ke login
 Route::get('/', function () {
@@ -32,8 +33,8 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // User Management - Resource Route (CRUD lengkap)
     Route::resource('users', UserController::class);
 
-    // User Management - Resource Route (CRUD lengkap)
-    Route::resource('schedule', UserController::class);
+    // Schedule Management - Resource Route (CRUD lengkap)
+    Route::resource('schedules', ScheduleController::class);
 
     Route::resource('lab', LabController::class);
 
