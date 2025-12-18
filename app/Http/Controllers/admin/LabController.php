@@ -25,8 +25,12 @@ class LabController extends Controller
 
         $totalLabs = $labs->count();
         $totalPC = $labs->sum('pcCount');
+        $activePC = DB::table('komputer')
+            ->where('status', 'Active')
+            ->count();
 
-        return view('admin.dashboard.lab.index', compact('labs', 'totalLabs', 'totalPC'));
+
+        return view('admin.dashboard.lab.index', compact('labs', 'totalLabs', 'totalPC', 'activePC'));
     }
 
 
