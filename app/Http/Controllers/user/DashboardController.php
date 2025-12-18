@@ -23,11 +23,11 @@ class DashboardController extends Controller
         // Ambil statistik (sesuaikan dengan kebutuhan)
         $data = [
             'user' => $user,
-            'totalBookings' => 0, // Nanti bisa diisi dari tabel booking
-            'activeBookings' => 0,
-            'totalComputers' => DB::table('komputer')->where('status', 'Active')->count(),
+            // 'totalBookings' => 0, // Nanti bisa diisi dari tabel booking
+            // 'activeBookings' => 0,
+            // 'totalComputers' => DB::table('komputer')->where('status', 'Active')->count(),
         ];
 
-        return view('user.dashboard.index', $data);
+        return view('user.dashboard', $data);
     }
 }
