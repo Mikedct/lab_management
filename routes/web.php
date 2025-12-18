@@ -81,7 +81,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
 
 Route::middleware(['user.auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-    Route::get('lab-schedule', [UserScheduleController::class, 'index'])->name('lab-schedule.index');
+    Route::get('schedule', [UserScheduleController::class, 'index'])->name('schedule.index');
     Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
     Route::get('reports', [UserReportController::class, 'index'])->name('reports.index');
     Route::get('reports/create', [UserReportController::class, 'create'])->name('reports.create');

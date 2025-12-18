@@ -21,17 +21,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.schedule') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.schedule') }}">
+                    <a class="nav-link text-white {{ request()->routeIs('user.schedule.*') ? 'fw-semibold' : '' }}"
+                    href="{{ route('user.schedule.index') }}">
                         Jadwal Lab
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.computers') ? 'fw-semibold' : '' }}"
-                        href="{{ route('user.computers') }}">
-                        Daftar Komputer
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->routeIs('user.reports.*') ? 'fw-semibold' : '' }}"
@@ -41,12 +36,12 @@
                 </li>
             </ul>
 
-            <form class="d-flex ms-lg-3" method="POST" action="{{ route('admin.logout') }}">
-                @csrf
-                <button class="btn btn-outline-light btn-sm" type="submit">
-                    Logout
-                </button>
-            </form>
+        <form class="d-flex ms-lg-3" method="POST" action="{{ route('user.logout') }}">
+            @csrf
+            <button class="btn btn-outline-light btn-sm" type="submit">
+                Logout
+            </button>
+        </form>
         </div>
     </div>
 </nav>
