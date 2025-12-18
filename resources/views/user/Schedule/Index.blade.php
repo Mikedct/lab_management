@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal Lab - User</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -21,13 +22,20 @@
             font-size: 0.8rem;
             border-radius: 999px;
             padding: 4px 10px;
+            display: inline-block;
+            min-width: 90px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+
+    {{-- Navbar User --}}
     @include('layouts.partials.user-navbar')
-    
+
     <div class="container-fluid px-4 py-4">
+
+        {{-- Header --}}
         <div class="page-header d-flex flex-wrap justify-content-between align-items-center mb-3">
             <div>
                 <h3 class="fw-bold mb-1">Jadwal Penggunaan Lab Komputer</h3>
@@ -36,25 +44,31 @@
                 </p>
             </div>
 
-            <div class="d-flex gap-2 mt-3 mt-md-0">
-                <select class="form-select form-select-sm">
-                    <option selected>Semua Lab</option>
-                    <option>Lab Komputer 1</option>
-                    <option>Lab Komputer 2</option>
-                    <option>Lab Jaringan</option>
-                    <option>Lab Multimedia</option>
+            {{-- Filter --}}
+            <form method="GET" class="d-flex gap-2 mt-3 mt-md-0">
+                <select name="lab_name" class="form-select form-select-sm" onchange="this.form.submit()">
+                    <option value="">Semua Lab</option>
+                    @foreach($labs as $lab)
+                        <option value="{{ $lab->lab_name }}"
+                            {{ request('lab_name') == $lab->lab_name ? 'selected' : '' }}>
+                            {{ $lab->lab_name }}
+                        </option>
+                    @endforeach
                 </select>
-                <select class="form-select form-select-sm">
-                    <option selected>Semua Hari</option>
-                    <option>Senin</option>
-                    <option>Selasa</option>
-                    <option>Rabu</option>
-                    <option>Kamis</option>
-                    <option>Jumat</option>
+
+                <select name="day" class="form-select form-select-sm" onchange="this.form.submit()">
+                    <option value="">Semua Hari</option>
+                    @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] as $day)
+                        <option value="{{ $day }}"
+                            {{ request('day') == $day ? 'selected' : '' }}>
+                            {{ $day }}
+                        </option>
+                    @endforeach
                 </select>
-            </div>
+            </form>
         </div>
 
+        {{-- Table --}}
         <div class="card border-0 shadow-sm">
             <div class="card-body p-3 p-md-4">
                 <div class="table-responsive">
@@ -70,24 +84,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($schedules ?? [] as $schedule)
+                            @forelse($schedules as $schedule)
                                 <tr>
                                     <td>{{ $schedule->lab_name }}</td>
                                     <td>{{ $schedule->day }}</td>
-                                    <td>{{ $schedule->start_time }} - {{ $schedule->end_time }}</td>
+                                    <td>
+                                        {{ $schedule->start_time }} - {{ $schedule->end_time }}
+                                    </td>
                                     <td>{{ $schedule->course }}</td>
                                     <td>{{ $schedule->lecturer }}</td>
                                     <td>
                                         @php
-                                            $status = strtolower($schedule->status);
+                                            $statusMap = [
+                                                'active' => ['label' => 'Berjalan', 'class' => 'bg-success text-white'],
+                                                'inactive' => ['label' => 'Akan Datang', 'class' => 'bg-warning text-dark'],
+                                                'cancelled' => ['label' => 'Dibatalkan', 'class' => 'bg-secondary text-white'],
+                                            ];
+
+                                            $status = $statusMap[$schedule->status] ?? [
+                                                'label' => 'Selesai',
+                                                'class' => 'bg-secondary text-white'
+                                            ];
                                         @endphp
-                                        @if($status === 'berjalan')
-                                            <span class="status-badge bg-success text-white">Berjalan</span>
-                                        @elseif($status === 'akan datang')
-                                            <span class="status-badge bg-warning text-dark">Akan Datang</span>
-                                        @else
-                                            <span class="status-badge bg-secondary text-white">Selesai</span>
-                                        @endif
+
+                                        <span class="status-badge {{ $status['class'] }}">
+                                            {{ $status['label'] }}
+                                        </span>
                                     </td>
                                 </tr>
                             @empty
@@ -101,13 +123,15 @@
                     </table>
                 </div>
 
-                <p class="text-muted small mt-2 mb-0">
+                <p class="text-muted small mt-3 mb-0">
                     * Jadwal dapat berubah sewaktu-waktu. Pastikan mengecek kembali sebelum menggunakan lab.
                 </p>
             </div>
         </div>
+
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

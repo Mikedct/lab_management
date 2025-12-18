@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 
 use App\Http\Controllers\user\Auth\UserAuthController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
+use App\Http\Controllers\user\ScheduleController as UserScheduleController;
+use App\Http\Controllers\user\ReportController as UserReportController;
 
 // Redirect root ke user login
 Route::get('/', function () {
@@ -79,5 +81,11 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
 
 Route::middleware(['user.auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('schedule', [UserScheduleController::class, 'index'])->name('schedule.index');
     Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
+    Route::get('reports', [UserReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/create', [UserReportController::class, 'create'])->name('reports.create');
+    Route::post('reports', [UserReportController::class, 'store'])->name('reports.store');
+    Route::get('reports/{id}', [UserReportController::class, 'show'])->name('reports.show');
+
 });
