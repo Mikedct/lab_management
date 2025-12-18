@@ -36,131 +36,133 @@
     </style>
 </head>
 <body>
-    @include('layouts.partials.user-navbar')
 
-    <div class="page-header">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="header-content">
-                    <h2><i class="bi bi-plus-circle-fill me-2"></i>Buat Laporan</h2>
-                    <p class="mb-0 small">Laporkan masalah pada komputer agar dapat segera ditindaklanjuti.</p>
+@include('layouts.partials.user-navbar')
+
+<div class="page-header">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="header-content">
+            <h2><i class="bi bi-plus-circle-fill me-2"></i>Buat Laporan</h2>
+            <p class="mb-0 small">Laporkan masalah pada komputer agar dapat segera ditindaklanjuti.</p>
+        </div>
+        <a href="{{ route('user.reports.index') }}" class="btn btn-light">
+            <i class="bi bi-arrow-left me-1"></i> Kembali
+        </a>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            {{-- Error --}}
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Periksa kembali input kamu:</strong>
+                    <ul class="mb-0 mt-1">
+                        @foreach($errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <a href="{{ route('user.reports.index') }}" class="btn btn-light">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali
-                </a>
+            @endif
+
+            <div class="card card-form">
+                <div class="card-body p-4">
+
+                    <form action="{{ route('user.reports.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        {{-- LAB --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Pilih Lab</label>
+                            <select class="form-select" name="lab_id" id="labSelect" required>
+                                <option value="">-- Pilih Lab --</option>
+                                @foreach($labs as $lab)
+                                    <option value="{{ $lab->labID }}" {{ old('lab_id') == $lab->labID ? 'selected' : '' }}>
+                                        {{ $lab->labName }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- KOMPUTER --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Pilih Komputer</label>
+                            <select class="form-select" name="computer_id" id="computerSelect" required>
+                                <option value="">-- Pilih Lab terlebih dahulu --</option>
+                            </select>
+                            <small class="text-muted">
+                                Jika tidak ada, pilih yang paling mendekati dan jelaskan di deskripsi.
+                            </small>
+                        </div>
+
+                        {{-- JUDUL --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Judul Laporan</label>
+                            <input type="text" class="form-control" name="title"
+                                   value="{{ old('title') }}"
+                                   placeholder="Contoh: Komputer tidak bisa login"
+                                   required>
+                        </div>
+
+                        {{-- DESKRIPSI --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Deskripsi Masalah</label>
+                            <textarea class="form-control" name="description" rows="5"
+                                      placeholder="Jelaskan masalah secara detail"
+                                      required>{{ old('description') }}</textarea>
+                        </div>
+
+                        {{-- FOTO --}}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Lampiran Foto (opsional)</label>
+                            <input type="file" class="form-control" name="attachment" accept="image/*">
+                            <small class="text-muted">Upload foto layar error / kondisi komputer.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="bi bi-send me-1"></i> Kirim Laporan
+                        </button>
+
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
+</div>
 
-    <div class="container pb-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
+{{-- DATA KOMPUTER --}}
+<script>
+    const computersByLab = @json($computersByLab);
 
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <div class="fw-semibold mb-1">Periksa kembali input kamu:</div>
-                        <ul class="mb-0">
-                            @foreach($errors->all() as $err)
-                                <li>{{ $err }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+    const labSelect = document.getElementById('labSelect');
+    const computerSelect = document.getElementById('computerSelect');
 
-                <div class="card card-form">
-                    <div class="card-body p-4">
-                        <form action="{{ route('user.reports.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+    function renderComputers(labId) {
+        computerSelect.innerHTML = '';
 
-                            <div class="mb-3">
-                                <label class="form-label">Pilih Lab</label>
-                                <select class="form-select" name="lab_id" id="labSelect" required>
-                                    <option value="">-- Pilih Lab --</option>
-                                    @foreach($labs ?? [] as $lab)
-                                        <option value="{{ $lab->labID ?? $lab->id }}">
-                                            {{ $lab->labName ?? $lab->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+        if (!labId || !computersByLab[labId]) {
+            computerSelect.innerHTML = `<option value="">-- Tidak ada komputer --</option>`;
+            return;
+        }
 
-                            <div class="mb-3">
-                                <label class="form-label">Pilih Komputer</label>
-                                <select class="form-select" name="computer_id" id="computerSelect" required>
-                                    <option value="">-- Pilih Lab terlebih dahulu --</option>
-                                </select>
-                                <div class="text-muted small mt-1">
-                                    Jika komputernya tidak ada di daftar, pilih yang paling mendekati / laporkan di deskripsi.
-                                </div>
-                            </div>
+        computerSelect.innerHTML = `<option value="">-- Pilih Komputer --</option>`;
 
-                            <div class="mb-3">
-                                <label class="form-label">Judul Laporan</label>
-                                <input type="text" class="form-control" name="title"
-                                       placeholder="Contoh: Komputer tidak bisa login / monitor mati"
-                                       value="{{ old('title') }}" required>
-                            </div>
+        computersByLab[labId].forEach(pc => {
+            const option = document.createElement('option');
+            option.value = pc.computerID;
+            option.textContent = pc.computerName;
+            computerSelect.appendChild(option);
+        });
+    }
 
-                            <div class="mb-3">
-                                <label class="form-label">Deskripsi Masalah</label>
-                                <textarea class="form-control" name="description" rows="5"
-                                          placeholder="Jelaskan masalah secara detail (error apa, kapan terjadi, tindakan yang sudah dicoba, dll)"
-                                          required>{{ old('description') }}</textarea>
-                            </div>
+    labSelect.addEventListener('change', function () {
+        renderComputers(this.value);
+    });
+</script>
 
-                            <div class="mb-3">
-                                <label class="form-label">Lampiran Foto (opsional)</label>
-                                <input type="file" class="form-control" name="attachment" accept="image/*">
-                                <div class="text-muted small mt-1">Boleh upload foto layar error / kondisi komputer.</div>
-                            </div>
-
-                            <button type="submit" class="btn btn-danger w-100">
-                                <i class="bi bi-send me-1"></i> Kirim Laporan
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                {{-- Data komputer untuk filtering --}}
-                <script>
-                    // Struktur data: labId -> list komputer
-                    const computersByLab = @json(($computersByLab ?? []));
-
-                    const labSelect = document.getElementById('labSelect');
-                    const computerSelect = document.getElementById('computerSelect');
-
-                    function renderComputers(labId) {
-                        computerSelect.innerHTML = '';
-                        if (!labId || !computersByLab[labId] || computersByLab[labId].length === 0) {
-                            const opt = document.createElement('option');
-                            opt.value = '';
-                            opt.textContent = '-- Tidak ada komputer untuk lab ini --';
-                            computerSelect.appendChild(opt);
-                            return;
-                        }
-
-                        const first = document.createElement('option');
-                        first.value = '';
-                        first.textContent = '-- Pilih Komputer --';
-                        computerSelect.appendChild(first);
-
-                        computersByLab[labId].forEach(pc => {
-                            const opt = document.createElement('option');
-                            opt.value = pc.id;
-                            opt.textContent = pc.name;
-                            computerSelect.appendChild(opt);
-                        });
-                    }
-
-                    labSelect?.addEventListener('change', function () {
-                        renderComputers(this.value);
-                    });
-                </script>
-
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -110,7 +110,7 @@
 
         {{-- Jadwal Lab --}}
         <div class="col-md-6">
-            <a href="{{ route('user.lab-schedule.index') }}" class="menu-card schedule">
+            <a href="{{ route('user.schedule.index') }}" class="menu-card schedule">
                 <div class="menu-icon">
                     <i class="bi bi-calendar-event"></i>
                 </div>

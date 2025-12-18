@@ -26,11 +26,10 @@
                         Jadwal Lab
                     </a>
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.reports.*') ? 'fw-semibold' : '' }}"
-                        href="{{ route('user.reports.index') }}">
-                        Report
+                    <a class="nav-link text-white {{ request()->routeIs('user.computers') ? 'fw-semibold' : '' }}"
+                       href="{{ route('user.computers') }}">
+                        Daftar Komputer
                     </a>
                 </li>
             </ul>

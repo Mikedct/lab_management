@@ -21,6 +21,13 @@
                         Dashboard
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.report.index') }}">
+                        <i class="bi bi-exclamation-triangle me-1"></i> Reports
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <form method="POST" action="{{ route('admin.logout') }}" class="d-inline">
                         @csrf

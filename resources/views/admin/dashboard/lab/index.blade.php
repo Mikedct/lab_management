@@ -96,8 +96,12 @@
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         }
 
-        .stat-icon-small.red {
-            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+        .stat-icon-small.pink {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .stat-icon-small.blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
         .stat-content-small h4 {
@@ -268,12 +272,23 @@
                 </div>
                 <div class="col-md-4">
                     <div class="stat-card-small">
-                        <div class="stat-icon-small green">
-                            <i class="bi bi-check-circle"></i>
+                        <div class="stat-icon-small pink">
+                            <i class="bi bi-pc-display"></i>
                         </div>
                         <div class="stat-content-small">
                             <h4>{{ $totalPC }}</h4>
                             <p>Total PCs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card-small">
+                        <div class="stat-icon-small blue">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="stat-content-small">
+                            <h4>{{ $activePC }}</h4>
+                            <p>Total PC Aktif</p>
                         </div>
                     </div>
                 </div>
