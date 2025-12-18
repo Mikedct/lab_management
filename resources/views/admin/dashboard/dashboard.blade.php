@@ -361,10 +361,10 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <button class="btn btn-outline-success w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
-                        <i class="bi bi-calendar-plus-fill d-block mb-2" style="font-size: 24px;"></i>
+                    <a href="{{ route('admin.schedules.create') }}" class="btn btn-outline-primary w-100 py-3 text-decoration-none">
+                        <i class="bi bi-person-plus-fill d-block mb-2" style="font-size: 24px;"></i>
                         Buat Jadwal Baru
-                    </button>
+                    </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <button class="btn btn-outline-info w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
