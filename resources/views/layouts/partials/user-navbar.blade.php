@@ -34,7 +34,7 @@
                 </li>
             </ul>
 
-            <form class="d-flex ms-lg-3" method="POST" action="{{ route('admin.logout') }}">
+            <form class="d-flex ms-lg-3" method="POST" action="{{ route('user.logout') }}">
                 @csrf
                 <button class="btn btn-outline-light btn-sm" type="submit">
                     Logout
