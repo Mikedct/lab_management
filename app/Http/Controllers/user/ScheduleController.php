@@ -44,6 +44,6 @@ class ScheduleController extends Controller
             ->orderBy('lab_name')
             ->get();
 
-        return view('user.schedule.schedule', compact('schedules', 'labs'));
+        return view('user.Schedule.index', compact('schedules', 'labs'));
     }
 }

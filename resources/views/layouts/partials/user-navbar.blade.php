@@ -22,14 +22,14 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->routeIs('user.schedule') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.lab-schedule.index') }}">
+                       href="{{ route('user.schedule.index') }}">
                         Jadwal Lab
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ request()->routeIs('user.computers') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.computers') }}">
-                        Daftar Komputer
+                       href="{{ route('user.reports.index') }}">
+                        Laporan Lab
                     </a>
                 </li>
             </ul>
