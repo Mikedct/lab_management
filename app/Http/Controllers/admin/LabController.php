@@ -51,7 +51,7 @@ class LabController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('admin.dashboar.lab.index')
+        return redirect()->route('admin.dashboard.lab.index')
             ->with('success', 'Lab berhasil ditambahkan!');
     }
 

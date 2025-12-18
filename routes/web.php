@@ -3,18 +3,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\LabController;
-use App\Http\Controllers\Admin\ComputerController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\LabController as AdminLabController;
+use App\Http\Controllers\Admin\ComputerController as AdminComputerController;
+use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
 
-// Redirect root ke login
+use App\Http\Controllers\user\Auth\UserAuthController;
+use App\Http\Controllers\user\DashboardController as UserDashboardController;
+
+// Redirect root ke user login
 Route::get('/', function () {
-    return redirect()->route('admin.auth.login');
+    return redirect()->route('user.login');
 });
 
 // ============================================
-// AUTH ROUTES (Tanpa Middleware)
+// USER AUTH ROUTES
+// ============================================
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('login', [UserAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [UserAuthController::class, 'login'])->name('login.post');
+});
+
+// ============================================
+// ADMIN AUTH ROUTES
 // ============================================
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('auth.login');
@@ -27,28 +39,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // User Management - Resource Route (CRUD lengkap)
-    Route::resource('users', UserController::class);
+    Route::resource('users', AdminUserController::class);
 
-    // User Management - Resource Route (CRUD lengkap)
-    Route::resource('schedule', UserController::class);
+    // Schedule Management - Resource Route (CRUD lengkap)
+    Route::resource('schedules', AdminScheduleController::class);
 
-    Route::resource('lab', LabController::class);
+    Route::resource('lab', AdminLabController::class);
 
     // Nested route untuk komputer dalam lab
     Route::prefix('lab/{labID}')->group(function () {
-        Route::get('computer/create', [ComputerController::class, 'create'])->name('computer.create');
-        Route::post('computer', [ComputerController::class, 'store'])->name('computer.store');
-        Route::get('computer/{computerID}/edit', [ComputerController::class, 'edit'])->name('computer.edit');
-        Route::put('computer/{computerID}', [ComputerController::class, 'update'])->name('computer.update');
-        Route::delete('computer/{computerID}', [ComputerController::class, 'destroy'])->name('computer.destroy');
+        Route::get('computer/create', [AdminComputerController::class, 'create'])->name('computer.create');
+        Route::post('computer', [AdminComputerController::class, 'store'])->name('computer.store');
+        Route::get('computer/{computerID}/edit', [AdminComputerController::class, 'edit'])->name('computer.edit');
+        Route::put('computer/{computerID}', [AdminComputerController::class, 'update'])->name('computer.update');
+        Route::delete('computer/{computerID}', [AdminComputerController::class, 'destroy'])->name('computer.destroy');
     });
 
 
     // Simpan komputer baru
-    Route::post('lab/{lab}/computer', [LabController::class, 'storeComputer'])->name('admin.computer.store');
+    Route::post('lab/{lab}/computer', [AdminLabController::class, 'storeComputer'])->name('admin.computer.store');
 
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
@@ -60,7 +72,12 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Route::resource('schedules', ScheduleController::class);
 
     // Lab Monitoring (uncomment when ready)
-    // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
+    // Route::get('lab/status', [AdminLabController::class, 'status'])->name('lab.status');
 
-    // Route::get('lab', [LabController::class, 'index'])->name('lab.index');
+    // Route::get('lab', [AdminLabController::class, 'index'])->name('lab.index');
+});
+
+Route::middleware(['user.auth'])->prefix('user')->name('user.')->group(function () {
+    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
 });

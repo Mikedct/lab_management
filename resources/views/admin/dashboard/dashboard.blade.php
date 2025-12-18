@@ -314,7 +314,7 @@
 
                 <!-- Schedule Management -->
                 <div class="col-md-4">
-                    <a href="{{ route('admin.schedule.index') }}" class="menu-card schedule">
+                    <a href="{{ route('admin.schedules.index') }}" class="menu-card schedule">
                         <div class="menu-icon">
                             <i class="bi bi-calendar-event"></i>
                         </div>
