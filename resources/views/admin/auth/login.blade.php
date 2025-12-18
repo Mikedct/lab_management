@@ -362,7 +362,7 @@
         </form>
 
         <div class="footer-text">
-            dibuat dengan cinta
+            © {{ date('Y') }} UBD Lab Management System
         </div>
     </div>
 </div>
