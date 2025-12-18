@@ -21,9 +21,9 @@ class DashboardController extends Controller
         // Ambil data dari database menggunakan Query Builder
         $data = [
             'totalUsers' => DB::table('users')->count(),
-            //'totalSchedules' => DB::table('schedules')->count(), // Sesuaikan nama tabel
-            //'totalComputers' => DB::table('komputer')->count(),
-            //'activeComputers' => DB::table('komputer')->where('status', 'Active')->count(),
+            'totalSchedules' => DB::table('schedules')->count(), // Sesuaikan nama tabel
+            'totalComputers' => DB::table('komputer')->count(),
+            'activeComputers' => DB::table('komputer')->where('status', 'Active')->count(),
         ];
 
         return view('admin.dashboard.dashboard', $data);
