@@ -3,19 +3,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DashboardController as ADC;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LabController;
 use App\Http\Controllers\Admin\ComputerController;
 use App\Http\Controllers\Admin\ScheduleController;
 
-// Redirect root ke login
+use App\Http\Controllers\user\Auth\UserAuthController;
+use App\Http\Controllers\user\DashboardController as UDC;
+
+// Redirect root ke user login
 Route::get('/', function () {
-    return redirect()->route('admin.auth.login');
+    return redirect()->route('user.login');
 });
 
 // ============================================
-// AUTH ROUTES (Tanpa Middleware)
+// USER AUTH ROUTES
+// ============================================
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('login', [UserAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [UserAuthController::class, 'login'])->name('login.post');
+});
+
+// ============================================
+// ADMIN AUTH ROUTES
 // ============================================
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('auth.login');
@@ -28,7 +39,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [ADC::class, 'index'])->name('dashboard');
 
     // User Management - Resource Route (CRUD lengkap)
     Route::resource('users', UserController::class);
@@ -64,4 +75,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Route::get('lab/status', [LabController::class, 'status'])->name('lab.status');
 
     // Route::get('lab', [LabController::class, 'index'])->name('lab.index');
+});
+
+Route::middleware(['user.auth'])->prefix('user')->name('user.')->group(function () {
+    Route::get('dashboard', [UDC::class, 'index'])->name('dashboard');
+    Route::post('logout', [UserAuthController::class, 'logout'])->name('logout');
 });
