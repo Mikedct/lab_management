@@ -1,45 +1,108 @@
-{{-- resources/views/layouts/partials/user-navbar.blade.php --}}
-<nav class="navbar navbar-expand-lg shadow-sm" style="background-color: #b72024;">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand d-flex align-items-center text-white" href="{{ route('user.dashboard') }}">
-            <img src="{{ asset('images/logo-UBD.png') }}" alt="Logo UBD"
-                 height="36" class="me-2" onerror="this.style.display='none'">
-            <span class="fw-bold">Lab Management System</span>
-        </a>
+<!-- resources/views/layouts/partials/admin-navbar.blade.php -->
+<nav style="background-color: #764ba2;" class="text-white shadow-lg">
+    <div class="container-fluid px-4 py-3">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <!-- Logo & Brand -->
+            <div class="d-flex align-items-center mb-2 mb-md-0">
+                <img src="{{ asset('images/logo-UBD.png') }}" 
+                     alt="Logo Univ A" 
+                     height="40" 
+                     class="me-3"
+                     onerror="this.style.display='none'">
+                <h1 class="h4 mb-0 fw-bold">Lab Management System</h1>
+            </div>
 
-        <button class="navbar-toggler text-white border-0" type="button"
-                data-bs-toggle="collapse" data-bs-target="#userNavbar">
-            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="userNavbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <!-- Navigation Menu -->
+            <ul class="nav gap-3 flex-wrap">
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.dashboard') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.dashboard') }}">
-                        Beranda
+                    <a href="{{ route('user.dashboard') }}" 
+                       class="nav-link text-white px-3 py-2 {{ request()->routeIs('user.dashboard') ? 'active-link' : '' }}">
+                        <i class="bi bi-speedometer2 me-1"></i>
+                        Dashboard
                     </a>
                 </li>
+                
+           
+
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.schedule') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.schedule.index') }}">
-                        Jadwal Lab
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ request()->routeIs('user.computers') ? 'fw-semibold' : '' }}"
-                       href="{{ route('user.reports.index') }}">
-                        Laporan Lab
-                    </a>
+                    <form method="POST" action="{{ route('user.logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-logout">
+                            <i class="bi bi-box-arrow-right me-1"></i>
+                            Logout
+                        </button>
+                    </form>
                 </li>
             </ul>
-
-            <form class="d-flex ms-lg-3" method="POST" action="{{ route('user.logout') }}">
-                @csrf
-                <button class="btn btn-outline-light btn-sm" type="submit">
-                    Logout
-                </button>
-            </form>
         </div>
     </div>
 </nav>
+
+<style>
+    /* Navigation Link Styles */
+    .nav-link {
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .nav-link:hover {
+        background-color: #764ba2;
+        transform: translateY(-2px);
+    }
+
+    .nav-link.active-link {
+        background-color: #764ba2;
+        border-bottom: 3px solid #ffffff;
+        font-weight: 600;
+    }
+
+    /* Logout Button */
+    .btn-logout {
+        background-color: #ffffff;
+        color: #764ba2;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-logout:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Logo Hover Effect */
+    nav img:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .container-fluid {
+            padding: 15px 20px;
+        }
+
+        .h4 {
+            font-size: 1rem;
+        }
+
+        .nav {
+            margin-top: 10px;
+        }
+
+        .nav-link {
+            padding: 6px 12px !important;
+            font-size: 14px;
+        }
+
+        .btn-logout {
+            padding: 6px 15px;
+            font-size: 14px;
+        }
+    }
+</style>
