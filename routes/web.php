@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\LabController as AdminLabController;
 use App\Http\Controllers\Admin\ComputerController as AdminComputerController;
 use App\Http\Controllers\Admin\ScheduleController as AdminScheduleController;
+use App\Http\Controllers\Admin\SettingsController as AdminSettingsController;
 
 use App\Http\Controllers\user\Auth\UserAuthController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
@@ -63,6 +64,11 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
 
     // Simpan komputer baru
     Route::post('lab/{lab}/computer', [AdminLabController::class, 'storeComputer'])->name('admin.computer.store');
+
+    // Settings (NEW)
+    Route::get('settings', [AdminSettingsController::class, 'index'])->name('settings.index');
+    Route::put('settings/profile', [AdminSettingsController::class, 'updateProfile'])->name('settings.update-profile');
+    Route::put('settings/password', [AdminSettingsController::class, 'updatePassword'])->name('settings.update-password');
 
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
