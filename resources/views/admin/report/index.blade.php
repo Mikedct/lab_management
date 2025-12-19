@@ -306,7 +306,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($reports ?? [] as $index => $report)
+                                @forelse($reports as $index => $report)
                                 <tr>
                                     <td><strong>{{ $index + 1 }}</strong></td>
                                     <td>

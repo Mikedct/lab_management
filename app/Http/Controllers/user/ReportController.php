@@ -17,21 +17,17 @@ class ReportController extends Controller
         $userId = session('userID');
 
         $reports = DB::table('reports')
-            ->leftJoin('labs', 'reports.lab_id', '=', 'labs.labID')
-            ->leftJoin('computers', 'reports.computer_id', '=', 'computers.computerID')
-            ->where('reports.user_id', $userId)
-            ->orderByDesc('reports.created_at')
-            ->select([
-                'reports.id',
-                'reports.title',
-                'reports.status',
-                'reports.created_at',
-                'labs.labName as lab_name',
-                'computers.computerName as computer_name',
-            ])
+            ->join('komputer', 'reports.computerID', '=', 'komputer.computerID')
+            ->join('labPC', 'komputer.labID', '=', 'labPC.labID')
+            ->select(
+                'reports.*',
+                'komputer.computerName',   // contoh field di komputer
+                'labPC.labName'             // field yang ingin ditambahkan
+            )
+            ->orderBy('reports.updated_at')
             ->get();
 
-        return view('user.report.index', compact('reports'));
+        return view('user.report.index', compact('reports', 'userId'));
     }
 
     /**
@@ -60,11 +56,11 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lab_id'       => 'required',
-            'computer_id'  => 'required',
-            'title'        => 'required|string|max:255',
-            'description'  => 'required|string',
-            'attachment'   => 'nullable|image|max:2048',
+            'lab_id' => 'required',
+            'computer_id' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'attachment' => 'nullable|image|max:2048',
         ]);
 
         $path = null;
@@ -74,15 +70,15 @@ class ReportController extends Controller
         }
 
         DB::table('reports')->insert([
-            'user_id'     => session('userID'),
-            'lab_id'      => $request->lab_id,
+            'user_id' => session('userID'),
+            'lab_id' => $request->lab_id,
             'computer_id' => $request->computer_id,
-            'title'       => $request->title,
+            'title' => $request->title,
             'description' => $request->description,
-            'attachment'  => $path,
-            'status'      => 'new',
-            'created_at'  => now(),
-            'updated_at'  => now(),
+            'attachment' => $path,
+            'status' => 'new',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return redirect()
@@ -98,20 +94,21 @@ class ReportController extends Controller
         $userId = session('userID');
 
         $report = DB::table('reports')
-            ->leftJoin('labs', 'reports.lab_id', '=', 'labs.labID')
-            ->leftJoin('computers', 'reports.computer_id', '=', 'computers.computerID')
-            ->where('reports.id', $id)
-            ->where('reports.user_id', $userId)
+            ->Join('komputer', 'reports.computerID', '=', 'komputer.computerID')
+            ->Join('labPC', 'komputer.labID', '=', 'labPC.labID')
+            ->where('reports.reportID', $id)
+            ->where('reports.userID', $userId)
             ->select([
                 'reports.*',
-                'labs.labName as lab_name',
-                'computers.computerName as computer_name',
+                'labPC.labName as lab_name',
+                'komputer.computerName as computer_name',
             ])
             ->first();
 
-        if (!$report) {
-            abort(404);
-        }
+        // if (!$report) {
+        //     dd($report);
+        //     abort(404);
+        // }
 
         return view('user.report.show', compact('report'));
     }

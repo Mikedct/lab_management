@@ -112,14 +112,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($reports ?? [] as $index => $report)
+                            @forelse($reports as $index => $report)
                                 <tr>
                                     <td><strong>{{ $index + 1 }}</strong></td>
-                                    <td>{{ $report->created_at?->format('d M Y H:i') ?? '-' }}</td>
+                                    <td>{{\Carbon\Carbon::parse($report->created_at)->format('d F Y, H:i') }}</td>
                                     <td>
-                                        <div class="fw-semibold">{{ $report->lab_name ?? ($report->lab->labName ?? $report->lab->name ?? '-') }}</div>
+                                        <div class="fw-semibold">{{ $report->labName ?? ($report->lab->labName ?? $report->lab->name ?? '-') }}</div>
                                         <div class="text-muted small">
-                                            Komputer: {{ $report->computer_name ?? ($report->computer->computerName ?? $report->computer->name ?? '-') }}
+                                            Komputer: {{ $report->computerName ?? ($report->computer->computerName ?? $report->computer->name ?? '-') }}
                                         </div>
                                     </td>
                                     <td>{{ $report->title ?? '-' }}</td>
