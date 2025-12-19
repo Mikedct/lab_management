@@ -97,6 +97,10 @@
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
+        .menu-card.report .menu-icon { 
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); 
+        }
+
         .menu-title {
             font-size: 22px;
             font-weight: bold;
@@ -340,6 +344,22 @@
                         </p>
                         <span class="menu-badge">
                             <i class="bi bi-eye me-1"></i>View Status PC
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Report Management -->
+                <div class="col-md-4">
+                    <a href="{{ route('admin.report.index') }}" class="menu-card report">
+                        <div class="menu-icon">
+                            <i class="bi bi-flag-fill"></i>
+                        </div>
+                        <h5 class="menu-title">Report Management</h5>
+                        <p class="menu-description">
+                            Mengelola gangguan pada PC lab yang dilaporkan oleh user
+                        </p>
+                        <span class="menu-badge">
+                            <i class="bi bi-flag me-1"></i>Manage Reports
                         </span>
                     </a>
                 </div>
