@@ -373,10 +373,10 @@
                     </button>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <button class="btn btn-outline-warning w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
-                        <i class="bi bi-gear-fill d-block mb-2" style="font-size: 24px;"></i>
-                        Pengaturan
-                    </button>
+                    <a href="{{ route('admin.settings.index') }}" class="btn btn-outline-warning w-100 py-3 text-decoration-none">
+                    <i class="bi bi-gear-fill d-block mb-2" style="font-size: 24px;"></i>
+                    Pengaturan
+                    </a>
                 </div>
             </div>
         </div>
