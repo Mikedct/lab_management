@@ -24,6 +24,7 @@ class ReportController extends Controller
                 'komputer.computerName',   // contoh field di komputer
                 'labPC.labName'             // field yang ingin ditambahkan
             )
+            ->where('reports.userID', $userId)
             ->orderBy('reports.updated_at')
             ->get();
 
@@ -36,16 +37,16 @@ class ReportController extends Controller
     public function create()
     {
         // Ambil semua lab
-        $labs = DB::table('labs')
+        $labs = DB::table('labPC')
             ->orderBy('labName')
             ->get(['labID', 'labName']);
 
         // Ambil komputer dikelompokkan per lab
-        $computers = DB::table('computers')
+        $computers = DB::table('komputer')
             ->orderBy('computerName')
-            ->get(['computerID', 'computerName', 'lab_id']);
+            ->get(['computerID', 'computerName', 'labID']);
 
-        $computersByLab = $computers->groupBy('lab_id');
+        $computersByLab = $computers->groupBy('labID');
 
         return view('user.report.create', compact('labs', 'computersByLab'));
     }
@@ -56,8 +57,6 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lab_id' => 'required',
-            'computer_id' => 'required',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'attachment' => 'nullable|image|max:2048',
@@ -70,9 +69,8 @@ class ReportController extends Controller
         }
 
         DB::table('reports')->insert([
-            'user_id' => session('userID'),
-            'lab_id' => $request->lab_id,
-            'computer_id' => $request->computer_id,
+            'userID' => session('userID'),
+            'computerID' => $request->computerID,
             'title' => $request->title,
             'description' => $request->description,
             'attachment' => $path,

@@ -89,7 +89,7 @@
                         {{-- KOMPUTER --}}
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Pilih Komputer</label>
-                            <select class="form-select" name="computer_id" id="computerSelect" required>
+                            <select class="form-select" name="computerID" id="computerSelect" required>
                                 <option value="">-- Pilih Lab terlebih dahulu --</option>
                             </select>
                             <small class="text-muted">
