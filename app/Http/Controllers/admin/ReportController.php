@@ -98,4 +98,36 @@ class ReportController extends Controller
             ->route('admin.reports.index')
             ->with('success', 'Laporan berhasil dihapus.');
     }
+
+    public function viewAttachment($id)
+    {
+        $report = DB::table('reports')->where('reportID', $id)->first();
+
+        if (!$report || !$report->attachment) {
+            return redirect()->back()
+                ->with('error', 'Lampiran tidak ditemukan');
+        }
+
+        $path = $report->attachment;
+
+        if (!Storage::disk('public')->exists($path)) {
+            return redirect()->back()
+                ->with('error', 'File lampiran tidak tersedia');
+        }
+
+        // cek ekstensi file
+        $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+
+        $imageExt = ['jpg', 'jpeg', 'png', 'webp'];
+
+        if (in_array($extension, $imageExt)) {
+            // PREVIEW GAMBAR
+            return response()->file(
+                storage_path('app/public/' . $path)
+            );
+        }
+
+        return redirect()->back()
+            ->with('error', 'Lampiran bukan file gambar');
+    }
 }

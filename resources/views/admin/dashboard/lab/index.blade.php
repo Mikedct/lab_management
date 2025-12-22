@@ -247,11 +247,6 @@
                             </nav>
                         </div>
                     </div>
-                    <!-- <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                            <a href="{{ route('admin.users.create') }}" class="btn btn-light">
-                                <i class="bi bi-plus-circle me-1"></i> Tambah User Baru
-                            </a>
-                        </div> -->
                 </div>
             </div>
         </div>
