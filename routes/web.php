@@ -60,7 +60,11 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
         Route::get('computer/{computerID}/edit', [AdminComputerController::class, 'edit'])->name('computer.edit');
         Route::put('computer/{computerID}', [AdminComputerController::class, 'update'])->name('computer.update');
         Route::delete('computer/{computerID}', [AdminComputerController::class, 'destroy'])->name('computer.destroy');
+        Route::put('/computer/{computerID}/toggle-status', [AdminComputerController::class, 'toggleStatus'])->name('computer.toggleStatus');
     });
+
+
+
 
 
     // Simpan komputer baru

@@ -227,12 +227,31 @@
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
                                         <td>{{ $comp->computerName }}</td>
-                                        <td>
+                                        <td class="d-flex gap-2">
+                                            <a>
                                             @if($comp->status == 'Active')
                                                 <span class="badge bg-success">Active</span>
                                             @else
                                                 <span class="badge bg-secondary">Inactive</span>
                                             @endif
+                                            </a>
+                                            <!-- Toggle Status -->
+                                            <form
+                                                action="{{ route('admin.computer.toggleStatus', [$lab->labID, $comp->computerID]) }}"
+                                                method="POST" onsubmit="return confirm('Ubah status komputer ini?')">
+                                                @csrf
+                                                @method('PUT')
+
+                                                @if($comp->status == 'Active')
+                                                    <button class="btn btn-sm btn-secondary">
+                                                        <i class="bi bi-power"></i>
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-sm btn-success">
+                                                        <i class="bi bi-power"></i>
+                                                    </button>
+                                                @endif
+                                            </form>
                                         </td>
                                         <td>{{ $comp->storage }}</td>
                                         <td>
@@ -296,7 +315,6 @@
                                                     <i class="bi bi-trash"></i> Delete
                                                 </button>
                                             </form>
-
                                         </td>
                                     </tr>
                                 @empty

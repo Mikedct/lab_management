@@ -15,7 +15,7 @@ class ComputerController extends Controller
 
         if (!$lab) {
             return redirect()->route('admin.lab.index')
-                             ->with('error', 'Lab tidak ditemukan');
+                ->with('error', 'Lab tidak ditemukan');
         }
 
         return view('admin.dashboard.lab.computer.create', compact('lab'));
@@ -27,40 +27,40 @@ class ComputerController extends Controller
         $lab = DB::table('labpc')->where('labID', $labID)->first();
         if (!$lab) {
             return redirect()->route('admin.lab.index')
-                             ->with('error', 'Lab tidak ditemukan');
+                ->with('error', 'Lab tidak ditemukan');
         }
 
         $request->validate([
             'computerName' => 'required|string|max:50',
-            'status'       => 'required|in:Active,Inactive',
-            'storage'      => 'required|numeric|min:1',
-            'OS'           => 'required|string|max:50',
-            'CPU'          => 'required|string|max:50',
-            'GPU'          => 'required|string|max:50',
-            'RAM'          => 'required|numeric|min:1',
+            'status' => 'required|in:Active,Inactive',
+            'storage' => 'required|numeric|min:1',
+            'OS' => 'required|string|max:50',
+            'CPU' => 'required|string|max:50',
+            'GPU' => 'required|string|max:50',
+            'RAM' => 'required|numeric|min:1',
         ], [
             'computerName.required' => 'Nama komputer wajib diisi',
-            'status.required'       => 'Status wajib dipilih',
-            'storage.required'      => 'Storage wajib diisi',
-            'OS.required'           => 'OS wajib diisi',
-            'CPU.required'          => 'CPU wajib diisi',
-            'GPU.required'          => 'GPU wajib diisi',
-            'RAM.required'          => 'RAM wajib diisi',
+            'status.required' => 'Status wajib dipilih',
+            'storage.required' => 'Storage wajib diisi',
+            'OS.required' => 'OS wajib diisi',
+            'CPU.required' => 'CPU wajib diisi',
+            'GPU.required' => 'GPU wajib diisi',
+            'RAM.required' => 'RAM wajib diisi',
         ]);
 
         DB::table('komputer')->insert([
             'computerName' => $request->computerName,
-            'status'       => $request->status,
-            'storage'      => $request->storage,
-            'OS'           => $request->OS,
-            'CPU'          => $request->CPU,
-            'GPU'          => $request->GPU,
-            'RAM'          => $request->RAM,
-            'labID'        => $labID,
+            'status' => $request->status,
+            'storage' => $request->storage,
+            'OS' => $request->OS,
+            'CPU' => $request->CPU,
+            'GPU' => $request->GPU,
+            'RAM' => $request->RAM,
+            'labID' => $labID,
         ]);
 
         return redirect()->route('admin.lab.show', $labID)
-                         ->with('success', 'Komputer berhasil ditambahkan!');
+            ->with('success', 'Komputer berhasil ditambahkan!');
     }
 
     // Tampilkan form edit komputer
@@ -71,7 +71,7 @@ class ComputerController extends Controller
 
         if (!$lab || !$computer) {
             return redirect()->route('admin.lab.show', $labID)
-                             ->with('error', 'Lab atau komputer tidak ditemukan');
+                ->with('error', 'Lab atau komputer tidak ditemukan');
         }
 
         return view('admin.dashboard.lab.computer.edit', compact('lab', 'computer'));
@@ -83,33 +83,33 @@ class ComputerController extends Controller
         $computer = DB::table('komputer')->where('computerID', $computerID)->first();
         if (!$computer) {
             return redirect()->route('admin.lab.show', $labID)
-                             ->with('error', 'Komputer tidak ditemukan');
+                ->with('error', 'Komputer tidak ditemukan');
         }
 
         $request->validate([
             'computerName' => 'required|string|max:50',
-            'status'       => 'required|in:Active,Inactive',
-            'storage'      => 'required|numeric|min:1',
-            'OS'           => 'required|string|max:50',
-            'CPU'          => 'required|string|max:50',
-            'GPU'          => 'required|string|max:50',
-            'RAM'          => 'required|numeric|min:1',
+            'status' => 'required|in:Active,Inactive',
+            'storage' => 'required|numeric|min:1',
+            'OS' => 'required|string|max:50',
+            'CPU' => 'required|string|max:50',
+            'GPU' => 'required|string|max:50',
+            'RAM' => 'required|numeric|min:1',
         ]);
 
         DB::table('komputer')
             ->where('computerID', $computerID)
             ->update([
                 'computerName' => $request->computerName,
-                'status'       => $request->status,
-                'storage'      => $request->storage,
-                'OS'           => $request->OS,
-                'CPU'          => $request->CPU,
-                'GPU'          => $request->GPU,
-                'RAM'          => $request->RAM,
+                'status' => $request->status,
+                'storage' => $request->storage,
+                'OS' => $request->OS,
+                'CPU' => $request->CPU,
+                'GPU' => $request->GPU,
+                'RAM' => $request->RAM,
             ]);
 
         return redirect()->route('admin.lab.show', $labID)
-                         ->with('success', 'Komputer berhasil diupdate!');
+            ->with('success', 'Komputer berhasil diupdate!');
     }
 
     // Hapus komputer
@@ -118,12 +118,34 @@ class ComputerController extends Controller
         $computer = DB::table('komputer')->where('computerID', $computerID)->first();
         if (!$computer) {
             return redirect()->route('admin.lab.show', $labID)
-                             ->with('error', 'Komputer tidak ditemukan');
+                ->with('error', 'Komputer tidak ditemukan');
         }
 
         DB::table('komputer')->where('computerID', $computerID)->delete();
 
         return redirect()->route('admin.lab.show', $labID)
-                         ->with('success', 'Komputer berhasil dihapus!');
+            ->with('success', 'Komputer berhasil dihapus!');
+    }
+
+    public function toggleStatus($labID, $computerID)
+    {
+        $computer = DB::table('komputer')
+            ->where('computerID', $computerID)
+            ->where('labID', $labID)
+            ->first();
+
+        if (!$computer) {
+            return back()->with('error', 'Komputer tidak ditemukan');
+        }
+
+        $newStatus = $computer->status === 'Active' ? 'Inactive' : 'Active';
+
+        DB::table('komputer')
+            ->where('computerID', $computerID)
+            ->update([
+                'status' => $newStatus
+            ]);
+
+        return back()->with('success', 'Status komputer berhasil diubah');
     }
 }
