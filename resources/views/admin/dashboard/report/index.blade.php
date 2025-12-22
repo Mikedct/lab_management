@@ -26,7 +26,7 @@
 
         /* Header Section */
         .page-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
             padding: 30px 0;
             margin-bottom: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -251,28 +251,28 @@
             </div>
         </div>
 
-        {{-- Statistics
+        {{--Statistics--}}
         <div class="container stats-row">
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="stat-card-small">
-                        <div class="stat-icon-small purple">
-                            <i class="bi bi-people"></i>
+                        <div class="stat-icon-small green">
+                            <i class="bi bi-asterisk"></i>
                         </div>
                         <div class="stat-content-small">
-                            <h4>{{ $totalLabs }}</h4>
-                            <p>Total Labs</p>
+                            <h4>{{ $statusNew }}</h4>
+                            <p>Baru</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="stat-card-small">
                         <div class="stat-icon-small pink">
-                            <i class="bi bi-pc-display"></i>
+                            <i class="bi bi-hourglass"></i>
                         </div>
                         <div class="stat-content-small">
-                            <h4>{{ $totalPC }}</h4>
-                            <p>Total PCs</p>
+                            <h4>{{ $statusInProgress }}</h4>
+                            <p>Di Proses</p>
                         </div>
                     </div>
                 </div>
@@ -282,13 +282,13 @@
                             <i class="bi bi-check-circle"></i>
                         </div>
                         <div class="stat-content-small">
-                            <h4>{{ $activePC }}</h4>
-                            <p>Total PC Aktif</p>
+                            <h4>{{ $statusDone }}</h4>
+                            <p>Selesai</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <div class="container mb-5">
             <!-- Success/Error Messages -->

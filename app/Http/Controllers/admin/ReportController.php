@@ -22,7 +22,21 @@ class ReportController extends Controller
             )
             ->orderBy('reports.updated_at')
             ->get();
-        return view('admin.dashboard.report.index', compact('reports'));
+
+        $statusNew = DB::table('reports')
+            ->where('status', 'new')
+            ->count();
+        $statusInProgress = DB::table('reports')
+            ->where('status', 'in_progress')
+            ->count();
+        $statusDone = DB::table('reports')
+            ->where('status', 'done')
+            ->count();
+
+
+        return view('admin.dashboard.report.index', compact('reports','statusNew','statusInProgress', 'statusDone'));
+
+        
     }
 
     public function edit($id)
