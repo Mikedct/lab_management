@@ -235,7 +235,7 @@
                     <div class="col-md-6">
                         <div class="header-content">
                             <h2>
-                                <i class="bi bi-people-fill me-2"></i>Report Management
+                                <i class="bi bi-flag-fill me-2"></i>Report Management
                             </h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">

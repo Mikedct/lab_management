@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Detail Laporan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <style>
     body {
@@ -227,7 +228,7 @@
                     <div class="col-md-6">
                         <div class="header-content">
                             <h2>
-                                <i class="bi bi-people-fill me-2"></i>Report Management
+                                <i class="bi bi-flag-fill me-2"></i>Report Management
                             </h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
