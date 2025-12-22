@@ -72,7 +72,11 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     Route::put('settings/password', [AdminSettingsController::class, 'updatePassword'])->name('settings.update-password');
 
     // Report Management
-    Route::get('reports', [AdminReportController::class, 'index'])->name('report.index');
+    Route::get('reports', [AdminReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/{id}/edit', [AdminReportController::class, 'edit'])->name('reports.edit');
+    Route::put('reports/{id}', [AdminReportController::class, 'update'])->name('reports.update');
+    Route::delete('reports/{id}', [AdminReportController::class, 'destroy'])->name('reports.destroy');
+
 
     // Logout
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');

@@ -350,7 +350,7 @@
 
                 <!-- Report Management -->
                 <div class="col-md-4">
-                    <a href="{{ route('admin.report.index') }}" class="menu-card report">
+                    <a href="{{ route('admin.reports.index') }}" class="menu-card report">
                         <div class="menu-icon">
                             <i class="bi bi-flag-fill"></i>
                         </div>

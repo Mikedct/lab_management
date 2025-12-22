@@ -24,4 +24,78 @@ class ReportController extends Controller
             ->get();
         return view('admin.dashboard.report.index', compact('reports'));
     }
+
+    public function edit($id)
+    {
+        $report = DB::table('reports')
+            ->join('komputer', 'reports.computerID', '=', 'komputer.computerID')
+            ->join('labPC', 'komputer.labID', '=', 'labPC.labID')
+            ->select(
+                'reports.*',
+                'komputer.computerName',
+                'labPC.labName',
+                'labPC.labID'
+            )
+            ->where('reports.reportID', $id)
+            ->first();
+
+        if (!$report) {
+            abort(404);
+        }
+
+        $labs = DB::table('labPC')->get();
+        $computersByLab = DB::table('komputer')
+            ->select('computerID', 'computerName', 'labID')
+            ->get()
+            ->groupBy('labID');
+
+        return view('admin.dashboard.report.edit', compact('report', 'labs', 'computersByLab'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'lab_id' => 'required',
+            'computer_id' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'attachment' => 'nullable|image|max:2048',
+            'status' => 'required|string', // admin bisa ubah status
+        ]);
+
+        $path = null;
+        if ($request->hasFile('attachment')) {
+            $path = $request->file('attachment')->store('reports', 'public');
+        }
+
+        DB::table('reports')
+            ->where('reportID', $id)
+            ->update([
+                'computerID' => $request->computer_id,
+                'title' => $request->title,
+                'description' => $request->description,
+                'attachment' => $path ?? DB::raw('attachment'),
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+        return redirect()
+            ->route('admin.reports.index')
+            ->with('success', 'Laporan berhasil diperbarui oleh admin.');
+    }
+
+    public function destroy($id)
+    {
+        $report = DB::table('reports')->where('reportID', $id)->first();
+
+        if (!$report) {
+            abort(404);
+        }
+
+        DB::table('reports')->where('reportID', $id)->delete();
+
+        return redirect()
+            ->route('admin.reports.index')
+            ->with('success', 'Laporan berhasil dihapus.');
+    }
 }
