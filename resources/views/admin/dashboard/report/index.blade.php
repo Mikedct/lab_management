@@ -356,12 +356,12 @@
                                         <td>{{ $report->computerName }}</td>
 
                                         <td class="text-center">
-                                            @if($report->status == 'Pending')
-                                                <span class="badge bg-secondary">Pending</span>
-                                            @elseif($report->status == 'Process')
-                                                <span class="badge bg-warning text-dark">Process</span>
-                                            @elseif($report->status == 'Done')
-                                                <span class="badge bg-success">Done</span>
+                                            @if($report->status == 'new')
+                                                <span class="badge bg-danger">Baru</span>
+                                            @elseif($report->status == 'in_progress')
+                                                <span class="badge bg-warning text-dark">Diproses</span>
+                                            @elseif($report->status == 'done')
+                                                <span class="badge bg-success">Selesai</span>
                                             @else
                                                 <span class="badge bg-dark">{{ $report->status }}</span>
                                             @endif
@@ -383,11 +383,13 @@
                                             {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y') }}
                                         </td>
 
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-primary">
+                                        <td>
+                                            <a href="{{ route('admin.reports.show', $report->reportID) }}"
+                                                class="btn btn-sm btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
                                         </td>
+
                                     </tr>
                                 @empty
                                     <tr>
@@ -401,7 +403,8 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
 </body>
 
 </html>

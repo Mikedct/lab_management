@@ -137,6 +137,11 @@
             color: #4facfe;
         }
 
+        .menu-card.report .menu-badge {
+            background: rgba(79, 172, 254, 0.1);
+            color: #ff6a00;
+        }
+
         /* Statistics Section */
         .stats-section {
             margin-bottom: 40px;

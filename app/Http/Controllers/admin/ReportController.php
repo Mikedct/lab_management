@@ -34,10 +34,32 @@ class ReportController extends Controller
             ->count();
 
 
-        return view('admin.dashboard.report.index', compact('reports','statusNew','statusInProgress', 'statusDone'));
+        return view('admin.dashboard.report.index', compact('reports', 'statusNew', 'statusInProgress', 'statusDone'));
 
-        
+
     }
+
+    public function show($id)
+    {
+        $report = DB::table('reports')
+            ->join('komputer', 'reports.computerID', '=', 'komputer.computerID')
+            ->join('labPC', 'komputer.labID', '=', 'labPC.labID')
+            ->select(
+                'reports.*',
+                'komputer.computerName',
+                'labPC.labName'
+            )
+            ->where('reports.reportID', $id)
+            ->first();
+
+        if (!$report) {
+            return redirect()->route('admin.reports.index')
+                ->with('error', 'Laporan tidak ditemukan');
+        }
+
+        return view('admin.dashboard.report.show', compact('report'));
+    }
+
 
     public function edit($id)
     {
