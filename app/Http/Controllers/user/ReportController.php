@@ -89,25 +89,42 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        $userId = session('userID');
-
         $report = DB::table('reports')
-            ->Join('komputer', 'reports.computerID', '=', 'komputer.computerID')
-            ->Join('labPC', 'komputer.labID', '=', 'labPC.labID')
-            ->where('reports.reportID', $id)
-            ->where('reports.userID', $userId)
-            ->select([
+            ->join('komputer', 'reports.computerID', '=', 'komputer.computerID')
+            ->join('labPC', 'komputer.labID', '=', 'labPC.labID')
+            ->select(
                 'reports.*',
-                'labPC.labName as lab_name',
-                'komputer.computerName as computer_name',
-            ])
+                'komputer.computerName',
+                'labPC.labName'
+            )
+            ->where('reports.reportID', $id)
             ->first();
 
-        // if (!$report) {
-        //     dd($report);
-        //     abort(404);
-        // }
+        if (!$report) {
+            abort(404);
+        }
 
         return view('user.report.show', compact('report'));
     }
+
+    public function viewAttachment($id)
+    {
+        $report = DB::table('reports')
+            ->where('reportID', $id)
+            ->first();
+
+        if (!$report || !$report->attachment) {
+            return back()->with('error', 'Lampiran tidak ditemukan.');
+        }
+
+        $path = storage_path('app/public/' . $report->attachment);
+
+        if (!file_exists($path)) {
+            return back()->with('error', 'File lampiran tidak tersedia.');
+        }
+
+        return response()->file($path);
+    }
+
+
 }

@@ -110,5 +110,7 @@ Route::middleware(['user.auth'])->prefix('user')->name('user.')->group(function 
     Route::get('reports/create', [UserReportController::class, 'create'])->name('reports.create');
     Route::post('reports', [UserReportController::class, 'store'])->name('reports.store');
     Route::get('reports/{id}', [UserReportController::class, 'show'])->name('reports.show');
+    Route::get('reports/{id}/attachment', [UserReportController::class, 'viewAttachment']) ->name('reports.attachment');
+
 
 });

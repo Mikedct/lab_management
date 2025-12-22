@@ -303,7 +303,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <strong>Deskripsi Gangguan:</strong>
+                        <strong>Ubah Status:</strong>
                         <form action="{{ route('admin.reports.updateStatus', $report->reportID) }}" method="POST"
                             class="d-inline">
                             @csrf
