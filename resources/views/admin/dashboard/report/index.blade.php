@@ -383,11 +383,23 @@
                                             {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y') }}
                                         </td>
 
-                                        <td>
+                                        <td class="d-flex gap-2">
                                             <a href="{{ route('admin.reports.show', $report->reportID) }}"
                                                 class="btn btn-sm btn-info">
                                                 <i class="bi bi-eye"></i>
                                             </a>
+
+                                            <form action="{{ route('admin.reports.destroy', $report->reportID) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+
                                         </td>
 
                                     </tr>

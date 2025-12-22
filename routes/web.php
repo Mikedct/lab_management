@@ -82,6 +82,7 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     Route::delete('reports/{id}', [AdminReportController::class, 'destroy'])->name('reports.destroy');
     Route::get('reports/{id}/attachment',[AdminReportController::class, 'viewAttachment'])->name('reports.attachment');
     Route::get('reports/{id}',[AdminReportController::class, 'show'])->name('reports.show');
+    Route::put('reports/{id}/status', [AdminReportController::class, 'updateStatus'])->name('reports.updateStatus');
 
 
 

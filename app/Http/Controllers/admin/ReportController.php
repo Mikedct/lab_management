@@ -88,37 +88,64 @@ class ReportController extends Controller
         return view('admin.dashboard.report.edit', compact('report', 'labs', 'computersByLab'));
     }
 
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'lab_id' => 'required',
+    //         'computer_id' => 'required',
+    //         'title' => 'required|string|max:255',
+    //         'description' => 'required|string',
+    //         'attachment' => 'nullable|image|max:2048',
+    //         'status' => 'required|string', // admin bisa ubah status
+    //     ]);
+
+    //     $path = null;
+    //     if ($request->hasFile('attachment')) {
+    //         $path = $request->file('attachment')->store('reports', 'public');
+    //     }
+
+    //     DB::table('reports')
+    //         ->where('reportID', $id)
+    //         ->update([
+    //             'computerID' => $request->computer_id,
+    //             'title' => $request->title,
+    //             'description' => $request->description,
+    //             'attachment' => $path ?? DB::raw('attachment'),
+    //             'status' => $request->status,
+    //             'updated_at' => now(),
+    //         ]);
+
+    //     return redirect()
+    //         ->route('admin.reports.index')
+    //         ->with('success', 'Laporan berhasil diperbarui oleh admin.');
+    // }
+
+    public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'lab_id' => 'required',
-            'computer_id' => 'required',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'attachment' => 'nullable|image|max:2048',
-            'status' => 'required|string', // admin bisa ubah status
+            'status' => 'required|in:new,in_progress,done'
         ]);
 
-        $path = null;
-        if ($request->hasFile('attachment')) {
-            $path = $request->file('attachment')->store('reports', 'public');
+        $report = DB::table('reports')
+            ->where('reportID', $id)
+            ->first();
+
+        if (!$report) {
+            return redirect()->route('admin.reports.index')
+                ->with('error', 'Laporan tidak ditemukan');
         }
 
         DB::table('reports')
             ->where('reportID', $id)
             ->update([
-                'computerID' => $request->computer_id,
-                'title' => $request->title,
-                'description' => $request->description,
-                'attachment' => $path ?? DB::raw('attachment'),
                 'status' => $request->status,
-                'updated_at' => now(),
+                'updated_at' => now()
             ]);
 
-        return redirect()
-            ->route('admin.reports.index')
-            ->with('success', 'Laporan berhasil diperbarui oleh admin.');
+        return redirect()->route('admin.reports.show', $id)
+            ->with('success', 'Status laporan berhasil diperbarui');
     }
+
 
     public function destroy($id)
     {
