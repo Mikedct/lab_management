@@ -387,9 +387,10 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <button class="btn btn-outline-info w-100 py-3" onclick="alert('Fitur dalam pengembangan')">
+                    <a href="{{ route('admin.reports.index') }}" class="btn btn-outline-info w-100 py-3 text-decoration-none">
                         <i class="bi bi-file-earmark-text-fill d-block mb-2" style="font-size: 24px;"></i>
                         Lihat Laporan
+                    </a>
                     </button>
                 </div>
                 <div class="col-md-3 col-sm-6">
