@@ -236,7 +236,7 @@
 
     <div class="page-header">
         <div class="container">
-            <h2><i class="bi bi-person-badge me-2"></i>Detail User</h2>
+            <h2><i class="bi bi-person-badge me-2"></i>User Detail</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: rgba(255,255,255,0.8);">Dashboard</a></li>
@@ -253,7 +253,7 @@
             <div class="col-lg-8">
                 <div class="detail-card">
                     <div class="card-header-custom">
-                        <h4><i class="bi bi-person-circle me-2"></i>Informasi User</h4>
+                        <h4><i class="bi bi-person-circle me-2"></i>User Information</h4>
                     </div>
                     <div class="card-body-custom">
                         <!-- Avatar & Name -->
@@ -276,7 +276,7 @@
 
                             <div class="info-row">
                                 <div class="info-label">
-                                    <i class="bi bi-person me-2"></i>Nama Lengkap
+                                    <i class="bi bi-person me-2"></i>Full Name
                                 </div>
                                 <div class="info-value">
                                     {{ $user->userName }}
@@ -294,7 +294,7 @@
 
                             <div class="info-row">
                                 <div class="info-label">
-                                    <i class="bi bi-telephone me-2"></i>Nomor Telepon
+                                    <i class="bi bi-telephone me-2"></i>Phone Number
                                 </div>
                                 <div class="info-value">
                                     {{ $user->phone ?? '-' }}
@@ -341,7 +341,7 @@
 
                             <div class="info-row">
                                 <div class="info-label">
-                                    <i class="bi bi-calendar-plus me-2"></i>Terdaftar Sejak
+                                    <i class="bi bi-calendar-plus me-2"></i>Registered Since
                                 </div>
                                 <div class="info-value">
                                     {{ \Carbon\Carbon::parse($user->created_at)->format('d F Y, H:i') }} WIB
@@ -351,7 +351,7 @@
 
                             <div class="info-row">
                                 <div class="info-label">
-                                    <i class="bi bi-clock-history me-2"></i>Terakhir Diupdate
+                                    <i class="bi bi-clock-history me-2"></i>Last Updated
                                 </div>
                                 <div class="info-value">
                                     {{ \Carbon\Carbon::parse($user->updated_at)->format('d F Y, H:i') }} WIB
@@ -363,13 +363,13 @@
                         <!-- Action Buttons -->
                         <div class="action-buttons">
                             <a href="{{ route('admin.users.index') }}" class="btn btn-secondary btn-custom">
-                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                                <i class="bi bi-arrow-left me-1"></i> Back
                             </a>
                             <a href="{{ route('admin.users.edit', $user->userID) }}" class="btn btn-edit btn-custom">
                                 <i class="bi bi-pencil me-1"></i> Edit User
                             </a>
                             <button type="button" class="btn btn-delete btn-custom" onclick="confirmDelete()">
-                                <i class="bi bi-trash me-1"></i> Hapus User
+                                <i class="bi bi-trash me-1"></i> Delete User
                             </button>
                         </div>
                     </div>
@@ -387,13 +387,13 @@
                         <div class="stats-mini">
                             <i class="bi bi-calendar-check"></i>
                             <h3>{{ \Carbon\Carbon::parse($user->created_at)->diffInDays(now()) }}</h3>
-                            <p>Hari Bergabung</p>
+                            <p>Joining Day</p>
                         </div>
 
                         <div class="stats-mini">
                             <i class="bi bi-activity"></i>
                             <h3>{{ $user->status == 'Active' ? 'Aktif' : 'Tidak Aktif' }}</h3>
-                            <p>Status Akun</p>
+                            <p>Account Status</p>
                         </div>
                     </div>
                 </div>
@@ -401,7 +401,7 @@
                 <!-- Activity Timeline -->
                 <div class="detail-card">
                     <div class="card-header-custom">
-                        <h4><i class="bi bi-clock-history me-2"></i>Aktivitas Terakhir</h4>
+                        <h4><i class="bi bi-clock-history me-2"></i>Last Activities</h4>
                     </div>
                     <div class="card-body-custom">
                         <div class="timeline-item">
@@ -409,7 +409,7 @@
                                 <i class="bi bi-person-plus"></i>
                             </div>
                             <div class="timeline-content">
-                                <h6>User Terdaftar</h6>
+                                <h6>User Registered</h6>
                                 <p>{{ \Carbon\Carbon::parse($user->created_at)->format('d M Y, H:i') }}</p>
                             </div>
                         </div>
@@ -419,7 +419,7 @@
                                 <i class="bi bi-pencil"></i>
                             </div>
                             <div class="timeline-content">
-                                <h6>Data Terakhir Diupdate</h6>
+                                <h6>Last Updated Data</h6>
                                 <p>{{ \Carbon\Carbon::parse($user->updated_at)->format('d M Y, H:i') }}</p>
                             </div>
                         </div>
@@ -430,8 +430,8 @@
                                 <i class="bi bi-check-circle"></i>
                             </div>
                             <div class="timeline-content">
-                                <h6>Status Aktif</h6>
-                                <p>User dapat mengakses sistem</p>
+                                <h6>Status Active</h6>
+                                <p>Users can access the system</p>
                             </div>
                         </div>
                         @endif
@@ -447,21 +447,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Konfirmasi Hapus
+                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Confirm Delete
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus user <strong>{{ $user->userName }}</strong>?</p>
-                    <p class="text-muted small mb-0">Tindakan ini tidak dapat dibatalkan dan semua data terkait akan dihapus.</p>
+                    <p>Are you sure you want to delete the user? <strong>{{ $user->userName }}</strong>?</p>
+                    <p class="text-muted small mb-0">This action cannot be undone and all related data will be deleted.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <form action="{{ route('admin.users.destroy', $user->userID) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash me-1"></i>Hapus
+                            <i class="bi bi-trash me-1"></i>Delete
                         </button>
                     </form>
                 </div>

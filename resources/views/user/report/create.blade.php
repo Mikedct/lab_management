@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Buat Laporan - Lab Management</title>
+    <title>Create Report- Lab Management</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -42,11 +42,11 @@
 <div class="page-header">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="header-content">
-            <h2><i class="bi bi-plus-circle-fill me-2"></i>Buat Laporan</h2>
-            <p class="mb-0 small">Laporkan masalah pada komputer agar dapat segera ditindaklanjuti.</p>
+            <h2><i class="bi bi-plus-circle-fill me-2"></i>Create a Report</h2>
+            <p class="mb-0 small">Report problems with your computer so they can be addressed immediately.</p>
         </div>
         <a href="{{ route('user.reports.index') }}" class="btn btn-light">
-            <i class="bi bi-arrow-left me-1"></i> Kembali
+            <i class="bi bi-arrow-left me-1"></i> Back
         </a>
     </div>
 </div>
@@ -58,7 +58,7 @@
             {{-- Error --}}
             @if($errors->any())
                 <div class="alert alert-danger">
-                    <strong>Periksa kembali input kamu:</strong>
+                    <strong>Double-check your input:</strong>
                     <ul class="mb-0 mt-1">
                         @foreach($errors->all() as $err)
                             <li>{{ $err }}</li>
@@ -75,9 +75,9 @@
 
                         {{-- LAB --}}
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Pilih Lab</label>
+                            <label class="form-label fw-semibold">Select Lab</label>
                             <select class="form-select" name="lab_id" id="labSelect" required>
-                                <option value="">-- Pilih Lab --</option>
+                                <option value="">-- Select Lab --</option>
                                 @foreach($labs as $lab)
                                     <option value="{{ $lab->labID }}" {{ old('lab_id') == $lab->labID ? 'selected' : '' }}>
                                         {{ $lab->labName }}
@@ -88,18 +88,18 @@
 
                         {{-- KOMPUTER --}}
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Pilih Komputer</label>
+                            <label class="form-label fw-semibold">Select Computer</label>
                             <select class="form-select" name="computerID" id="computerSelect" required>
-                                <option value="">-- Pilih Lab terlebih dahulu --</option>
+                                <option value="">-- Select Lab first --</option>
                             </select>
                             <small class="text-muted">
-                                Jika tidak ada, pilih yang paling mendekati dan jelaskan di deskripsi.
+                                If none exist, select the closest option and explain in the description.
                             </small>
                         </div>
 
                         {{-- JUDUL --}}
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Judul Laporan</label>
+                            <label class="form-label fw-semibold">Report Title</label>
                             <input type="text" class="form-control" name="title"
                                    value="{{ old('title') }}"
                                    placeholder="Contoh: Komputer tidak bisa login"
@@ -108,7 +108,7 @@
 
                         {{-- DESKRIPSI --}}
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Deskripsi Masalah</label>
+                            <label class="form-label fw-semibold">Problem Description</label>
                             <textarea class="form-control" name="description" rows="5"
                                       placeholder="Jelaskan masalah secara detail"
                                       required>{{ old('description') }}</textarea>
@@ -116,13 +116,13 @@
 
                         {{-- FOTO --}}
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Lampiran Foto (opsional)</label>
+                            <label class="form-label fw-semibold">Photo Attachment (optional)</label>
                             <input type="file" class="form-control" name="attachment" accept="image/*">
                             <small class="text-muted">Upload foto layar error / kondisi komputer.</small>
                         </div>
 
                         <button type="submit" class="btn btn-danger w-100">
-                            <i class="bi bi-send me-1"></i> Kirim Laporan
+                            <i class="bi bi-send me-1"></i> Submit Report
                         </button>
 
                     </form>

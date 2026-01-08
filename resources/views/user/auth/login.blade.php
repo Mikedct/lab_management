@@ -329,7 +329,7 @@
         
         <h1 class="university-name">UBD</h1>
         <p class="university-subtitle">Lab Management System</p>
-        <div class="user-badge">👨‍🎓 Portal Mahasiswa & Dosen</div>
+        <div class="user-badge">👨‍🎓 Student & Faculty Portal</div>
         
         <!-- Student Illustration -->
         <div class="student-illustration">
@@ -374,7 +374,7 @@
     <!-- Right Section - Login Form -->
     <div class="right-section">
         <h2 class="login-title">Login User</h2>
-        <p class="login-subtitle">Masuk ke akun Anda untuk mengakses lab</p>
+        <p class="login-subtitle">Log in to your account to access the lab</p>
 
         @if($errors->any())
             <div class="error-message">
@@ -412,18 +412,18 @@
                     <input type="password" 
                            id="password" 
                            name="password" 
-                           placeholder="Masukkan password" 
+                           placeholder="Enter password" 
                            required>
                 </div>
             </div>
 
             <div class="remember-me">
                 <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Ingat saya</label>
+                <label for="remember">Remember Me</label>
             </div>
 
             <button type="submit">
-                🚀 Masuk ke Lab
+                🚀 Enter the Lab
             </button>
         </form>
 

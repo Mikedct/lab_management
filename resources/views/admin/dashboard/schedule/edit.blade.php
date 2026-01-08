@@ -112,7 +112,7 @@
                 <!-- Error Messages -->
                 @if($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Terdapat kesalahan:</strong>
+                        <strong>There is an error:</strong>
                         <ul class="mb-0 mt-2">
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -284,7 +284,7 @@
 
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                                <i class="bi bi-arrow-left me-1"></i> Back
                             </a>
                             <button type="submit" class="btn btn-submit">
                                 <i class="bi bi-save me-1"></i> Update Schedule

@@ -269,7 +269,7 @@
                     </div>
                     <div class="col-md-6 text-md-end mt-3 mt-md-0">
                         <a href="{{ route('admin.users.create') }}" class="btn btn-light">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah User Baru
+                            <i class="bi bi-plus-circle me-1"></i> Add new user
                         </a>
                     </div>
                 </div>
@@ -339,7 +339,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <h5 class="mb-0">
-                                <i class="bi bi-list-ul me-2"></i>Daftar Users
+                                <i class="bi bi-list-ul me-2"></i>Users List
                             </h5>
                         </div>
                         <div class="col-md-6">
@@ -361,7 +361,7 @@
                                     <th>Email</th>
                                     <th>Role</th>
                                     <th>Status</th>
-                                    <th>Bergabung</th>
+                                    <th>Joined</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -430,10 +430,10 @@
                                     <td colspan="7">
                                         <div class="empty-state">
                                             <i class="bi bi-inbox"></i>
-                                            <h5>Belum Ada Data User</h5>
-                                            <p>Klik tombol "Tambah User Baru" untuk menambahkan user pertama</p>
+                                            <h5>No User Data Yet</h5>
+                                            <p>Click the “Add New User” button to add the first user.</p>
                                             <a href="{{ route('admin.users.create') }}" class="btn btn-primary mt-3">
-                                                <i class="bi bi-plus-circle me-1"></i> Tambah User
+                                                <i class="bi bi-plus-circle me-1"></i> Add New User
                                             </a>
                                         </div>
                                     </td>
@@ -453,13 +453,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Konfirmasi Hapus
+                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Confirm Deletion
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus user <strong id="deleteUserName"></strong>?</p>
-                    <p class="text-muted small mb-0">Tindakan ini tidak dapat dibatalkan.</p>
+                    <p>Are you sure you want to delete the user? <strong id="deleteUserName"></strong>?</p>
+                    <p class="text-muted small mb-0">This action cannot be undone.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -467,7 +467,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash me-1"></i>Hapus
+                            <i class="bi bi-trash me-1"></i>Delete
                         </button>
                     </form>
                 </div>

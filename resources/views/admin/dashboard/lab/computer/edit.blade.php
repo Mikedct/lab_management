@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Edit Komputer - {{ $lab->labName }}</title>
+    <title>Edit Computer - {{ $lab->labName }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
@@ -88,7 +88,7 @@
 
     <div class="page-header">
         <div class="container">
-            <h2><i class="bi bi-pencil-square me-2"></i>Edit Komputer di Lab: {{ $lab->labName }}</h2>
+            <h2><i class="bi bi-pencil-square me-2"></i>Edit Computer in Lab: {{ $lab->labName }}</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
@@ -100,7 +100,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.lab.show', $lab->labID) }}">{{ $lab->labName }}</a>
                     </li>
-                    <li class="breadcrumb-item active">Edit Komputer</li>
+                    <li class="breadcrumb-item active">Edit Computer</li>
                 </ol>
             </nav>
         </div>
@@ -116,7 +116,7 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="computerName" class="form-label">Nama Komputer <span
+                            <label for="computerName" class="form-label">Computer Name<span
                                     class="required-mark">*</span></label>
                             <input type="text" name="computerName" id="computerName"
                                 class="form-control @error('computerName') is-invalid @enderror"
@@ -177,10 +177,10 @@
 
                         <div class="d-flex justify-content-between mt-4">
                             <a href="{{ route('admin.lab.show', $lab->labID) }}" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                                <i class="bi bi-arrow-left me-1"></i> Back
                             </a>
                             <button type="submit" class="btn btn-submit">
-                                <i class="bi bi-save me-1"></i> Update Komputer
+                                <i class="bi bi-save me-1"></i> Update Computer
                             </button>
                         </div>
 

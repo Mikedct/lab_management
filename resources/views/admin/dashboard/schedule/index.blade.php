@@ -325,8 +325,8 @@
                                 <td colspan="8">
                                     <div class="empty-state">
                                         <i class="bi bi-calendar-x"></i>
-                                        <h5>Belum Ada Jadwal</h5>
-                                        <p>Klik tombol "Add New Schedule" untuk menambahkan jadwal baru</p>
+                                        <h5>No Schedules Yet</h5>
+                                        <p>Click the “Add New Schedule” button to add a new schedule.</p>
                                         <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addScheduleModal">
                                             <i class="bi bi-plus-circle me-1"></i>Add New Schedule
                                         </button>
@@ -454,21 +454,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Konfirmasi Hapus
+                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>Confirm Delete
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus jadwal <strong id="deleteScheduleName"></strong>?</p>
-                    <p class="text-muted small mb-0">Tindakan ini tidak dapat dibatalkan.</p>
+                    <p>Are you sure you want to delete the schedule? <strong id="deleteScheduleName"></strong>?</p>
+                    <p class="text-muted small mb-0">This action cannot be undone.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <form id="deleteForm" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            <i class="bi bi-trash me-1"></i>Hapus
+                            <i class="bi bi-trash me-1"></i>Delete
                         </button>
                     </form>
                 </div>

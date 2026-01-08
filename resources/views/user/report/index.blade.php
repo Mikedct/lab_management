@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laporan Saya - Lab Management</title>
+    <title>My Report - Lab Management</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -58,7 +58,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-7">
                         <div class="header-content">
-                            <h2><i class="bi bi-flag-fill me-2"></i>Laporan Saya</h2>
+                            <h2><i class="bi bi-flag-fill me-2"></i>My Report</h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('user.dashboard') }}">Beranda</a></li>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-md-5 text-md-end mt-3 mt-md-0">
                         <a href="{{ route('user.reports.create') }}" class="btn btn-light">
-                            <i class="bi bi-plus-circle me-1"></i> Buat Laporan
+                            <i class="bi bi-plus-circle me-1"></i> Create a Report
                         </a>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="table-card-header">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h5 class="mb-0"><i class="bi bi-list-ul me-2"></i>Riwayat Laporan</h5>
+                            <h5 class="mb-0"><i class="bi bi-list-ul me-2"></i>Report History</h5>
                         </div>
                         <div class="col-md-6">
                             <div class="position-relative search-box ms-auto">
@@ -104,9 +104,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Lab / Komputer</th>
-                                <th>Judul</th>
+                                <th>Date</th>
+                                <th>Lab / Computer</th>
+                                <th>Title</th>
                                 <th>Status</th>
                                 <th class="text-center">Detail</th>
                             </tr>
@@ -126,11 +126,11 @@
                                     <td>
                                         @php $status = strtolower($report->status ?? 'new'); @endphp
                                         @if($status === 'new')
-                                            <span class="badge bg-danger">Baru</span>
+                                            <span class="badge bg-danger">New</span>
                                         @elseif($status === 'in_progress')
-                                            <span class="badge bg-warning text-dark">Diproses</span>
+                                            <span class="badge bg-warning text-dark">In Process</span>
                                         @elseif($status === 'done')
-                                            <span class="badge bg-success">Selesai</span>
+                                            <span class="badge bg-success">Done</span>
                                         @else
                                             <span class="badge bg-secondary">{{ ucfirst($status) }}</span>
                                         @endif
@@ -147,10 +147,10 @@
                                     <td colspan="6">
                                         <div class="empty-state">
                                             <i class="bi bi-inbox"></i>
-                                            <h5>Belum Ada Laporan</h5>
-                                            <p>Kamu bisa membuat laporan jika ada masalah pada komputer lab.</p>
+                                            <h5>No Report Yet</h5>
+                                            <p>You can file a report if there is a problem with the lab computers.</p>
                                             <a href="{{ route('user.reports.create') }}" class="btn btn-danger">
-                                                <i class="bi bi-plus-circle me-1"></i> Buat Laporan
+                                                <i class="bi bi-plus-circle me-1"></i> Create Report
                                             </a>
                                         </div>
                                     </td>

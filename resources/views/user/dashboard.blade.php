@@ -279,7 +279,7 @@
                     </h2>
                     <p>
                         <i class="bi bi-hand-thumbs-up me-1"></i>
-                        Selamat datang, <strong>{{ session('userName', 'User') }}</strong>
+                        Welcome, <strong>{{ session('userName', 'User') }}</strong>
                     </p>
                 </div>
             </div>
@@ -318,7 +318,7 @@
         <div class="col-12">
             <h4 class="mb-4 fw-bold text-center">
                 <i class="bi bi-grid-3x3-gap-fill me-2 text-primary"></i>
-                Menu Utama
+                Main Menu
             </h4>
 
             <div class="row g-4 mb-4 justify-content-center">
@@ -328,12 +328,12 @@
                         <div class="menu-icon">
                             <i class="bi bi-calendar-event"></i>
                         </div>
-                        <h5 class="menu-title">Jadwal Lab</h5>
+                        <h5 class="menu-title">Lab Schedule</h5>
                         <p class="menu-description">
-                            Lihat jadwal penggunaan lab komputer yang tersedia
+                            See the schedule for available computer lab usage
                         </p>
                         <span class="menu-badge">
-                            <i class="bi bi-calendar-plus me-1"></i>Lihat Jadwal
+                            <i class="bi bi-calendar-plus me-1"></i>See Schedule
                         </span>
                     </a>
                 </div>
@@ -344,12 +344,12 @@
                         <div class="menu-icon">
                             <i class="bi bi-file-earmark-text"></i>
                         </div>
-                        <h5 class="menu-title">Laporan</h5>
+                        <h5 class="menu-title">Reports</h5>
                         <p class="menu-description">
-                            Lihat laporan penggunaan lab Anda
+                            View your lab usage report
                         </p>
                         <span class="menu-badge">
-                            <i class="bi bi-file-text me-1"></i>Lihat Laporan
+                            <i class="bi bi-file-text me-1"></i>See Reports
                         </span>
                     </a>
                 </div>
@@ -365,7 +365,7 @@
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-calendar-week me-2"></i>
-                        Jadwal Saya
+                        My Schedules
                     </h5>
                 </div>
                 <div class="card-body">
@@ -373,8 +373,8 @@
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Hari</th>
-                                    <th>Waktu</th>
+                                    <th>Day</th>
+                                    <th>Time</th>
                                     <th>Lab</th>
                                     <th>Subject</th>
                                     <th>Instructor</th>

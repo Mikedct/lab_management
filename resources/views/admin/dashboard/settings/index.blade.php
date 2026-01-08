@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Pengaturan Akun - Lab Management</title>
+    <title>Account Setting - Lab Management</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -122,11 +122,11 @@
 
     <div class="page-header">
         <div class="container">
-            <h2><i class="bi bi-gear me-2"></i>Pengaturan Akun</h2>
+            <h2><i class="bi bi-gear me-2"></i>Account Setting</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" style="color: rgba(255,255,255,0.8);">Dashboard</a></li>
-                    <li class="breadcrumb-item active" style="color: white;">Pengaturan</li>
+                    <li class="breadcrumb-item active" style="color: white;">Setting</li>
                 </ol>
             </nav>
         </div>
@@ -145,7 +145,7 @@
 
                 @if($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Terdapat kesalahan:</strong>
+                        <strong>There is an error:</strong>
                         <ul class="mb-0 mt-2">
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -169,7 +169,7 @@
 
                 <!-- Edit Profile -->
                 <div class="settings-card">
-                    <h5><i class="bi bi-person-circle me-2"></i>Edit Profil</h5>
+                    <h5><i class="bi bi-person-circle me-2"></i>Edit Profile</h5>
                     
                     <form action="{{ route('admin.settings.update-profile') }}" method="POST">
                         @csrf
@@ -178,7 +178,7 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="adminName" class="form-label">
-                                    Nama Lengkap <span class="required-mark">*</span>
+                                    Full Name <span class="required-mark">*</span>
                                 </label>
                                 <input type="text" 
                                        class="form-control @error('adminName') is-invalid @enderror" 
@@ -207,7 +207,7 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label for="phoneNumber" class="form-label">Nomor Telepon</label>
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
                                 <input type="text" 
                                        class="form-control @error('phoneNumber') is-invalid @enderror" 
                                        id="phoneNumber" 
@@ -222,10 +222,10 @@
 
                         <div class="d-flex justify-content-between mt-4">
                             <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                                <i class="bi bi-arrow-left me-1"></i> Back
                             </a>
                             <button type="submit" class="btn btn-save">
-                                <i class="bi bi-save me-1"></i> Simpan Perubahan
+                                <i class="bi bi-save me-1"></i> Save Changes
                             </button>
                         </div>
                     </form>
@@ -233,11 +233,11 @@
 
                 <!-- Change Password -->
                 <div class="settings-card">
-                    <h5><i class="bi bi-key me-2"></i>Ubah Password</h5>
+                    <h5><i class="bi bi-key me-2"></i>Change Password</h5>
                     
                     <div class="info-box">
                         <i class="bi bi-info-circle me-2"></i>
-                        <span>Password harus minimal 6 karakter untuk keamanan akun Anda</span>
+                        <span>Passwords must be at least 6 characters long for your account security.</span>
                     </div>
 
                     <form action="{{ route('admin.settings.update-password') }}" method="POST">
@@ -247,13 +247,13 @@
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <label for="current_password" class="form-label">
-                                    Password Lama <span class="required-mark">*</span>
+                                    Old Password <span class="required-mark">*</span>
                                 </label>
                                 <input type="password" 
                                        class="form-control @error('current_password') is-invalid @enderror" 
                                        id="current_password" 
                                        name="current_password" 
-                                       placeholder="Masukkan password lama"
+                                       placeholder="Enter your old password"
                                        required>
                                 @error('current_password')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -262,13 +262,13 @@
 
                             <div class="col-md-12 mb-3">
                                 <label for="new_password" class="form-label">
-                                    Password Baru <span class="required-mark">*</span>
+                                    New Password <span class="required-mark">*</span>
                                 </label>
                                 <input type="password" 
                                        class="form-control @error('new_password') is-invalid @enderror" 
                                        id="new_password" 
                                        name="new_password" 
-                                       placeholder="Minimal 6 karakter"
+                                       placeholder="Minimum 6 characters"
                                        required>
                                 @error('new_password')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -277,13 +277,13 @@
 
                             <div class="col-md-12 mb-3">
                                 <label for="new_password_confirmation" class="form-label">
-                                    Konfirmasi Password Baru <span class="required-mark">*</span>
+                                    Confirm New Password <span class="required-mark">*</span>
                                 </label>
                                 <input type="password" 
                                        class="form-control" 
                                        id="new_password_confirmation" 
                                        name="new_password_confirmation" 
-                                       placeholder="Ulangi password baru"
+                                       placeholder="Repeat the new password"
                                        required>
                             </div>
                         </div>
@@ -298,7 +298,7 @@
 
                 <!-- Account Info -->
                 <div class="settings-card">
-                    <h5><i class="bi bi-info-circle me-2"></i>Informasi Akun</h5>
+                    <h5><i class="bi bi-info-circle me-2"></i>Account Information</h5>
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">

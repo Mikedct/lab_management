@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Detail Laporan</title>
+    <title>Detail Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
@@ -249,7 +249,7 @@
         <div class="container mt-4 mb-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Detail Laporan Gangguan</h5>
+                    <h5 class="mb-0">Incident Report Details</h5>
                 </div>
 
                 <div class="card-body">
@@ -262,11 +262,11 @@
                         <div class="col-md-6">
                             <strong>Status:</strong><br>
                             @if($report->status === 'new')
-                                <span class="badge bg-danger">Baru</span>
+                                <span class="badge bg-danger">New</span>
                             @elseif($report->status === 'in_progress')
-                                <span class="badge bg-warning text-dark">Diproses</span>
+                                <span class="badge bg-warning text-dark">In Process</span>
                             @elseif($report->status === 'done')
-                                <span class="badge bg-success">Selesai</span>
+                                <span class="badge bg-success">Done</span>
                             @else
                                 <span class="badge bg-dark">{{ $report->status }}</span>
                             @endif
@@ -279,32 +279,32 @@
                             <p>{{ $report->labName }}</p>
                         </div>
                         <div class="col-md-6">
-                            <strong>Komputer:</strong>
+                            <strong>Computer:</strong>
                             <p>{{ $report->computerName }}</p>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <strong>Deskripsi Gangguan:</strong>
+                        <strong>Description of Disorders:</strong>
                         <div class="border rounded p-3 bg-light">
                             {{ $report->description }}
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <strong>Lampiran:</strong><br>
+                        <strong>Appendix:</strong><br>
 
                         @if($report->attachment)
                             <img src="{{ route('admin.reports.attachment', $report->reportID) }}"
                                 class="img-fluid rounded border" style="max-height: 400px" alt="Lampiran laporan">
 
                         @else
-                            <p class="text-muted">Tidak ada lampiran</p>
+                            <p class="text-muted">No Appendix Yet</p>
                         @endif
                     </div>
 
                     <div class="mb-3">
-                        <strong>Ubah Status:</strong>
+                        <strong>Change Status:</strong>
                         <form action="{{ route('admin.reports.updateStatus', $report->reportID) }}" method="POST"
                             class="d-inline">
                             @csrf
@@ -312,13 +312,13 @@
 
                             <select name="status" class="form-select d-inline w-auto">
                                 <option value="new" {{ $report->status == 'new' ? 'selected' : '' }}>
-                                    Baru
+                                    New
                                 </option>
                                 <option value="in_progress" {{ $report->status == 'in_progress' ? 'selected' : '' }}>
-                                    Diproses
+                                    In Process
                                 </option>
                                 <option value="done" {{ $report->status == 'done' ? 'selected' : '' }}>
-                                    Selesai
+                                    Done
                                 </option>
                             </select>
 
@@ -330,8 +330,8 @@
                     </div>
 
                     <div class="text-muted">
-                        Dibuat: {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y H:i') }} <br>
-                        Update terakhir: {{ \Carbon\Carbon::parse($report->updated_at)->format('d M Y H:i') }}
+                        Created At: {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y H:i') }} <br>
+                        Last Updated: {{ \Carbon\Carbon::parse($report->updated_at)->format('d M Y H:i') }}
                     </div>
 
                 </div>

@@ -228,12 +228,12 @@
                     <div class="col-md-6">
                         <div class="header-content">
                             <h2>
-                                <i class="bi bi-people-fill me-2"></i>Detail Laporan
+                                <i class="bi bi-people-fill me-2"></i>Report Detail
                             </h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="{{ route('user.dashboard') }}">Beranda</a>
+                                        <a href="{{ route('user.dashboard') }}">Home</a>
                                     </li>
                                     <li class="breadcrumb-item">
                                         <a href="{{ route('user.reports.index') }}">Report</a>
@@ -250,23 +250,23 @@
         <div class="container mt-4 mb-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Detail Laporan Gangguan</h5>
+                    <h5 class="mb-0">Incident Report Details</h5>
                 </div>
                 <div class="card-body">
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <strong>Judul:</strong>
+                            <strong>Title:</strong>
                             <p>{{ $report->title }}</p>
                         </div>
                         <div class="col-md-6">
                             <strong>Status:</strong><br>
                             @if($report->status === 'new')
-                                <span class="badge bg-danger">Baru</span>
+                                <span class="badge bg-danger">New</span>
                             @elseif($report->status === 'in_progress')
-                                <span class="badge bg-warning text-dark">Diproses</span>
+                                <span class="badge bg-warning text-dark">In Process</span>
                             @elseif($report->status === 'done')
-                                <span class="badge bg-success">Selesai</span>
+                                <span class="badge bg-success">Done</span>
                             @else
                                 <span class="badge bg-dark">{{ $report->status }}</span>
                             @endif
@@ -279,32 +279,32 @@
                             <p>{{ $report->labName }}</p>
                         </div>
                         <div class="col-md-6">
-                            <strong>Komputer:</strong>
+                            <strong>Computer:</strong>
                             <p>{{ $report->computerName }}</p>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <strong>Deskripsi Gangguan:</strong>
+                        <strong>Description of Disorders:</strong>
                         <div class="border rounded p-3 bg-light">
                             {{ $report->description }}
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <strong>Lampiran:</strong><br>
+                        <strong>Appendix:</strong><br>
 
                         @if($report->attachment)
                             <img src="{{ route('admin.reports.attachment', $report->reportID) }}"
                                 class="img-fluid rounded border" style="max-height: 400px" alt="Lampiran laporan">
 
                         @else
-                            <p class="text-muted">Tidak ada lampiran</p>
+                            <p class="text-muted">No attachments</p>
                         @endif
                     </div>
                     <div class="text-muted">
-                        Dibuat: {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y H:i') }} <br>
-                        Update terakhir: {{ \Carbon\Carbon::parse($report->updated_at)->format('d M Y H:i') }}
+                        Created: {{ \Carbon\Carbon::parse($report->created_at)->format('d M Y H:i') }} <br>
+                        Last Updated: {{ \Carbon\Carbon::parse($report->updated_at)->format('d M Y H:i') }}
                     </div>
 
                 </div>

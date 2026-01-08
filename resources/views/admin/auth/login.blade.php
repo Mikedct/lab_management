@@ -319,8 +319,8 @@
 
     <!-- Right Section - Login Form -->
     <div class="right-section">
-        <h2 class="login-title">Selamat Datang!</h2>
-        <p class="login-subtitle">Silakan login untuk mengakses sistem</p>
+        <h2 class="login-title">Welcome!</h2>
+        <p class="login-subtitle">Please log in to access the system.</p>
 
         @if($errors->any())
             <div class="error-message">
@@ -338,7 +338,7 @@
                     <input type="text" 
                            id="email" 
                            name="email" 
-                           placeholder="Masukkan email atau username" 
+                           placeholder="Enter your email or username" 
                            required 
                            autofocus>
                 </div>
@@ -351,7 +351,7 @@
                     <input type="password" 
                            id="password" 
                            name="password" 
-                           placeholder="Masukkan password" 
+                           placeholder="Enter your password" 
                            required>
                 </div>
             </div>

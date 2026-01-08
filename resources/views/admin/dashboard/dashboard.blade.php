@@ -222,11 +222,11 @@
                     <div class="col-md-8">
                         <div class="welcome-text">
                             <h2>
-                                <i class="bi bi-speedometer2 me-2"></i>Dashboard Admin
+                                <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
                             </h2>
                             <p>
                                 <i class="bi bi-person-circle me-1"></i>
-                                Selamat datang, <strong>{{ session('adminName', 'Administrator') }}</strong>
+                                Welcome, <strong>{{ session('adminName', 'Administrator') }}</strong>
                             </p>
                         </div>
                     </div>
@@ -266,7 +266,7 @@
                         </div>
                         <div class="stat-content">
                             <h3>{{ $totalSchedules ?? 0 }}</h3>
-                            <p>Total Jadwal</p>
+                            <p>Total Schedules</p>
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                         </div>
                         <div class="stat-content">
                             <h3>{{ $activeComputers ?? 0 }}</h3>
-                            <p>PC Active</p>
+                            <p>Active PC</p>
                         </div>
                     </div>
                 </div>
@@ -301,7 +301,7 @@
         <div class="container menu-section">
             <h4 class="mb-4 fw-bold text-dark">
                 <i class="bi bi-grid-3x3-gap-fill me-2" style="color: #b72024;"></i>
-                Menu Utama
+                Main Menu
             </h4>
 
             <div class="row g-4">
@@ -313,7 +313,7 @@
                         </div>
                         <h5 class="menu-title">User Management</h5>
                         <p class="menu-description">
-                            Kelola data pengguna, tambah, edit, dan hapus user sistem
+                            Manage user data, add, edit, and delete system users.
                         </p>
                         <span class="menu-badge">
                             <i class="bi bi-person-plus me-1"></i>CRUD Users
@@ -329,10 +329,10 @@
                         </div>
                         <h5 class="menu-title">Schedule Lab</h5>
                         <p class="menu-description">
-                            Atur jadwal penggunaan lab, reservasi, dan ketersediaan
+                            Set lab usage schedules, reservations, and availability
                         </p>
                         <span class="menu-badge">
-                            <i class="bi bi-calendar-plus me-1"></i>CRUD Jadwal
+                            <i class="bi bi-calendar-plus me-1"></i>CRUD Schedules
                         </span>
                     </a>
                 </div>
@@ -345,10 +345,10 @@
                         </div>
                         <h5 class="menu-title">Lab Monitoring</h5>
                         <p class="menu-description">
-                            Monitor kondisi PC lab, status, spesifikasi, dan maintenance
+                            Monitor the condition of lab PCs, their status, specifications, and maintenance
                         </p>
                         <span class="menu-badge">
-                            <i class="bi bi-eye me-1"></i>View Status PC
+                            <i class="bi bi-eye me-1"></i>View PC Status
                         </span>
                     </a>
                 </div>
@@ -361,7 +361,7 @@
                         </div>
                         <h5 class="menu-title">Report Management</h5>
                         <p class="menu-description">
-                            Mengelola gangguan pada PC lab yang dilaporkan oleh user
+                            Managing PC lab malfunctions reported by users
                         </p>
                         <span class="menu-badge">
                             <i class="bi bi-flag me-1"></i>Manage Reports
@@ -382,26 +382,26 @@
                 <div class="col-md-3 col-sm-6">
                     <a href="{{ route('admin.users.create') }}" class="btn btn-outline-primary w-100 py-3 text-decoration-none">
                         <i class="bi bi-person-plus-fill d-block mb-2" style="font-size: 24px;"></i>
-                        Tambah User Baru
+                        Add New User
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <a href="{{ route('admin.schedules.create') }}" class="btn btn-outline-primary w-100 py-3 text-decoration-none">
                         <i class="bi bi-person-plus-fill d-block mb-2" style="font-size: 24px;"></i>
-                        Buat Jadwal Baru
+                        Create New Schedule
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <a href="{{ route('admin.reports.index') }}" class="btn btn-outline-info w-100 py-3 text-decoration-none">
                         <i class="bi bi-file-earmark-text-fill d-block mb-2" style="font-size: 24px;"></i>
-                        Lihat Laporan
+                        See Reports
                     </a>
                     </button>
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <a href="{{ route('admin.settings.index') }}" class="btn btn-outline-warning w-100 py-3 text-decoration-none">
                     <i class="bi bi-gear-fill d-block mb-2" style="font-size: 24px;"></i>
-                    Pengaturan
+                    Settings
                     </a>
                 </div>
             </div>

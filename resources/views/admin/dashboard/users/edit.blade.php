@@ -106,7 +106,7 @@
             <div class="col-lg-8">
                 <div class="info-box">
                     <i class="bi bi-info-circle me-2"></i>
-                    <p class="d-inline">Edit data user: <strong>{{ $user->userName }}</strong> (ID: {{ $user->userID }})</p>
+                    <p class="d-inline">Edit user data: <strong>{{ $user->userName }}</strong> (ID: {{ $user->userID }})</p>
                 </div>
 
                 <div class="form-card">
@@ -117,7 +117,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="userName" class="form-label">
-                                    Nama Lengkap <span class="required-mark">*</span>
+                                    Full Name <span class="required-mark">*</span>
                                 </label>
                                 <input type="text" 
                                        class="form-control @error('userName') is-invalid @enderror" 
@@ -157,7 +157,7 @@
                                         id="role" 
                                         name="role" 
                                         required>
-                                    <option value="">Pilih Role</option>
+                                    <option value="">Choose a Role</option>
                                     <option value="Mahasiswa" {{ old('role', $user->role) == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
                                     <option value="Dosen" {{ old('role', $user->role) == 'Dosen' ? 'selected' : '' }}>Dosen</option>
                                     <option value="Admin" {{ old('role', $user->role) == 'Admin' ? 'selected' : '' }}>Admin</option>
@@ -185,7 +185,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="phone" class="form-label">Nomor Telepon</label>
+                            <label for="phone" class="form-label">Phone Number</label>
                             <input type="text" 
                                    class="form-control @error('phone') is-invalid @enderror" 
                                    id="phone" 
@@ -200,11 +200,11 @@
                         <hr class="my-4">
 
                         <h5 class="mb-3">
-                            <i class="bi bi-key me-2"></i>Ubah Password (Opsional)
+                            <i class="bi bi-key me-2"></i>Change Password (Optional)
                         </h5>
                         <div class="alert alert-info">
                             <i class="bi bi-info-circle me-2"></i>
-                            Kosongkan jika tidak ingin mengubah password
+                            Leave blank if you do not want to change your password
                         </div>
 
                         <div class="row">
@@ -214,7 +214,7 @@
                                        class="form-control @error('password') is-invalid @enderror" 
                                        id="password" 
                                        name="password"
-                                       placeholder="Minimal 6 karakter">
+                                       placeholder="Minimum 6 characters">
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -226,7 +226,7 @@
                                        class="form-control" 
                                        id="password_confirmation" 
                                        name="password_confirmation"
-                                       placeholder="Ulangi password baru">
+                                       placeholder="Repeat your new password">
                             </div>
                         </div>
 
@@ -234,7 +234,7 @@
 
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
-                                <i class="bi bi-arrow-left me-1"></i> Kembali
+                                <i class="bi bi-arrow-left me-1"></i> Back
                             </a>
                             <button type="submit" class="btn btn-submit">
                                 <i class="bi bi-save me-1"></i> Update User

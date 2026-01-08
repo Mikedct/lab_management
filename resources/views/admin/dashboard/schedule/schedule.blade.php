@@ -33,7 +33,7 @@
     <div class="container d-flex justify-content-between align-items-center">
         <div>
             <h3><i class="bi bi-calendar-event me-2"></i>Lab Schedule</h3>
-            <small>Manajemen jadwal penggunaan lab</small>
+            <small>Lab usage schedule management</small>
         </div>
 
         <!-- ✅ BUTTON KE CREATE -->
@@ -123,7 +123,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Hapus jadwal ini?')">
+                                        onclick="return confirm('Delete this Schedule?')">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
@@ -133,11 +133,11 @@
                     <tr>
                         <td colspan="8" class="text-center py-4">
                             <i class="bi bi-calendar-x fs-1 text-muted"></i>
-                            <p class="mt-2">Belum ada jadwal</p>
+                            <p class="mt-2">No Schedules Yet</p>
 
                             <!-- ✅ BUTTON KE CREATE -->
                             <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Tambah Jadwal
+                                <i class="bi bi-plus-circle"></i> Add Schedule
                             </a>
                         </td>
                     </tr>

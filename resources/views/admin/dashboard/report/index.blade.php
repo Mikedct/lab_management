@@ -261,7 +261,7 @@
                         </div>
                         <div class="stat-content-small">
                             <h4>{{ $statusNew }}</h4>
-                            <p>Baru</p>
+                            <p>New</p>
                         </div>
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                         </div>
                         <div class="stat-content-small">
                             <h4>{{ $statusInProgress }}</h4>
-                            <p>Di Proses</p>
+                            <p>In Process</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
                         </div>
                         <div class="stat-content-small">
                             <h4>{{ $statusDone }}</h4>
-                            <p>Selesai</p>
+                            <p>Done</p>
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <h5 class="mb-0">
-                                <i class="bi bi-list-ul me-2"></i>Daftar Laporan
+                                <i class="bi bi-list-ul me-2"></i>Report List
                             </h5>
                         </div>
                     </div>
@@ -328,14 +328,14 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul</th>
-                                    <th>Deskripsi</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
                                     <th>Lab</th>
-                                    <th>Komputer</th>
+                                    <th>Computer</th>
                                     <th>Status</th>
-                                    <th>Lampiran</th>
-                                    <th>Tanggal</th>
-                                    <th>Aksi</th>
+                                    <th>Appendix</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -357,11 +357,11 @@
 
                                         <td class="text-center">
                                             @if($report->status == 'new')
-                                                <span class="badge bg-danger">Baru</span>
+                                                <span class="badge bg-danger">New</span>
                                             @elseif($report->status == 'in_progress')
-                                                <span class="badge bg-warning text-dark">Diproses</span>
+                                                <span class="badge bg-warning text-dark">In Process</span>
                                             @elseif($report->status == 'done')
-                                                <span class="badge bg-success">Selesai</span>
+                                                <span class="badge bg-success">Done</span>
                                             @else
                                                 <span class="badge bg-dark">{{ $report->status }}</span>
                                             @endif
@@ -374,7 +374,7 @@
                                                     <i class="bi bi-eye"></i> Preview
                                                 </a>
                                             @else
-                                                <span class="text-muted">Tidak ada</span>
+                                                <span class="text-muted">Not Available</span>
                                             @endif
                                         </td>
 
@@ -406,7 +406,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="9" class="text-center text-muted">
-                                            Belum ada laporan gangguan
+                                            No reports of disruption yet
                                         </td>
                                     </tr>
                                 @endforelse

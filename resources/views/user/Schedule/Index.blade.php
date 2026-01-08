@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Lab - User</title>
+    <title>Lab Schedule - User</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,16 +38,16 @@
         {{-- Header --}}
         <div class="page-header d-flex flex-wrap justify-content-between align-items-center mb-3">
             <div>
-                <h3 class="fw-bold mb-1">Jadwal Penggunaan Lab Komputer</h3>
+                <h3 class="fw-bold mb-1">Computer Lab Usage Schedule</h3>
                 <p class="text-muted mb-0 small">
-                    Lihat jadwal penggunaan lab agar tidak terjadi bentrok penggunaan.
+                    Check the lab schedule to avoid conflicts.
                 </p>
             </div>
 
             {{-- Filter --}}
             <form method="GET" class="d-flex gap-2 mt-3 mt-md-0">
                 <select name="lab_name" class="form-select form-select-sm" onchange="this.form.submit()">
-                    <option value="">Semua Lab</option>
+                    <option value="">All Lab</option>
                     @foreach($labs as $lab)
                         <option value="{{ $lab->lab_name }}"
                             {{ request('lab_name') == $lab->lab_name ? 'selected' : '' }}>
@@ -76,10 +76,10 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Lab</th>
-                                <th>Hari</th>
-                                <th>Jam</th>
-                                <th>Mata Kuliah / Kegiatan</th>
-                                <th>Dosen / Penanggung Jawab</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Course / Activity</th>
+                                <th>Lecturer / Person in Charge</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -96,13 +96,13 @@
                                     <td>
                                         @php
                                             $statusMap = [
-                                                'active' => ['label' => 'Berjalan', 'class' => 'bg-success text-white'],
-                                                'inactive' => ['label' => 'Akan Datang', 'class' => 'bg-warning text-dark'],
-                                                'cancelled' => ['label' => 'Dibatalkan', 'class' => 'bg-secondary text-white'],
+                                                'active' => ['label' => 'In Progress', 'class' => 'bg-success text-white'],
+                                                'inactive' => ['label' => 'Coming Soon', 'class' => 'bg-warning text-dark'],
+                                                'cancelled' => ['label' => 'Cancelled', 'class' => 'bg-secondary text-white'],
                                             ];
 
                                             $status = $statusMap[$schedule->status] ?? [
-                                                'label' => 'Selesai',
+                                                'label' => 'Done',
                                                 'class' => 'bg-secondary text-white'
                                             ];
                                         @endphp
@@ -115,7 +115,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center text-muted py-4">
-                                        Belum ada jadwal yang tersedia.
+                                        No schedule is available yet.
                                     </td>
                                 </tr>
                             @endforelse
@@ -124,7 +124,7 @@
                 </div>
 
                 <p class="text-muted small mt-3 mb-0">
-                    * Jadwal dapat berubah sewaktu-waktu. Pastikan mengecek kembali sebelum menggunakan lab.
+                    * The schedule is subject to change at any time. Be sure to check again before using the lab.
                 </p>
             </div>
         </div>

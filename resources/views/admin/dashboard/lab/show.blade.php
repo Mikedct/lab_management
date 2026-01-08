@@ -174,7 +174,7 @@
                     </div>
                     <div class="col-md-6 text-md-end mt-3 mt-md-0">
                         <a href="{{ route('admin.computer.create', $lab->labID) }}" class="btn btn-primary">
-                            <i class="bi bi-plus-circle me-1"></i> Tambah Komputer
+                            <i class="bi bi-plus-circle me-1"></i> Add Komputer
                         </a>
 
                     </div>
@@ -203,7 +203,7 @@
             <div class="table-card">
                 <div class="table-card-header">
                     <h5 class="mb-0">
-                        <i class="bi bi-list-ul me-2"></i>Daftar Komputer
+                        <i class="bi bi-list-ul me-2"></i> Computer Lists
                     </h5>
                 </div>
                 <div class="table-card-body">
@@ -219,7 +219,7 @@
                                     <th>CPU</th>
                                     <th>GPU</th>
                                     <th>RAM (GB)</th>
-                                    <th>Aksi</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -307,7 +307,7 @@
                                             <form
                                                 action="{{ route('admin.computer.destroy', [$lab->labID, $comp->computerID]) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus komputer ini?');">
+                                                onsubmit="return confirm('Are you sure you want to delete this computer?');">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -319,7 +319,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center text-muted">Belum ada komputer di lab ini</td>
+                                        <td colspan="8" class="text-center text-muted">There are no computers in this lab yet.</td>
                                     </tr>
                                 @endforelse
                             </tbody>

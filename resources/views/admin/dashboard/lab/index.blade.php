@@ -283,7 +283,7 @@
                         </div>
                         <div class="stat-content-small">
                             <h4>{{ $activePC }}</h4>
-                            <p>Total PC Aktif</p>
+                            <p>Total Active PC</p>
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <h5 class="mb-0">
-                                <i class="bi bi-list-ul me-2"></i>Daftar Lab
+                                <i class="bi bi-list-ul me-2"></i>List of Labs
                             </h5>
                         </div>
                     </div>
@@ -329,7 +329,7 @@
                                     <th>No</th>
                                     <th>Lab Name</th>
                                     <th>PC Count</th>
-                                    <th>Aksi</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -341,13 +341,13 @@
                                         <td>
                                             <a href="{{ route('admin.lab.show', $lab->labID) }}"
                                                 class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pc-display"></i> Komputer
+                                                <i class="bi bi-pc-display"></i> Computer
                                             </a>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4" class="text-center text-muted">Belum ada data lab</td>
+                                        <td colspan="4" class="text-center text-muted">No lab data yet</td>
                                     </tr>
                                 @endforelse
                             </tbody>
