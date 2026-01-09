@@ -391,7 +391,7 @@
 
                                             <form action="{{ route('admin.reports.destroy', $report->reportID) }}"
                                                 method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                onsubmit="return confirm('Are you sure you want to delete the report?')">
                                                 @csrf
                                                 @method('DELETE')
 

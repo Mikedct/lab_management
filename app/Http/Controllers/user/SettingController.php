@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -14,8 +14,8 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         // Cek apakah user sudah login
-        if (!session()->has('adminID')) {
-            return redirect()->route('admin.auth.login');
+        if (!session()->has('userID')) {
+            return redirect()->route('user.auth.login');
         }
 
         $query = DB::table('schedules');
@@ -69,7 +69,7 @@ class ScheduleController extends Controller
                   ->orderBy('lab_name')
                   ->get();
 
-        return view('admin.dashboard.schedule.schedule', compact('schedules', 'stats', 'labs'));
+        return view('user.dashboard.schedule.schedule', compact('schedules', 'stats', 'labs'));
     }
 
     /**
@@ -77,11 +77,11 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        if (!session()->has('adminID')) {
-            return redirect()->route('admin.auth.login');
+        if (!session()->has('userID')) {
+            return redirect()->route('user.auth.login');
         }
 
-        return view('admin.dashboard.schedule.create');
+        return view('user.dashboard.schedule.create');
     }
 
     /**
@@ -139,7 +139,7 @@ class ScheduleController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('admin.schedules.index')
+        return redirect()->route('user.schedules.index')
                         ->with('success', 'Jadwal berhasil ditambahkan!');
     }
 
@@ -148,18 +148,18 @@ class ScheduleController extends Controller
      */
     public function show($id)
     {
-        if (!session()->has('adminID')) {
-            return redirect()->route('admin.auth.login');
+        if (!session()->has('userID')) {
+            return redirect()->route('user.auth.login');
         }
 
         $schedule = DB::table('schedules')->where('scheduleID', $id)->first();
 
         if (!$schedule) {
-            return redirect()->route('admin.schedules.index')
+            return redirect()->route('user.schedules.index')
                            ->with('error', 'Jadwal tidak ditemukan');
         }
 
-        return view('admin.dashboard.schedule.show', compact('schedule'));
+        return view('user.dashboard.schedule.show', compact('schedule'));
     }
 
     /**
@@ -167,18 +167,18 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        if (!session()->has('adminID')) {
-            return redirect()->route('admin.auth.login');
+        if (!session()->has('userID')) {
+            return redirect()->route('user.auth.login');
         }
 
         $schedule = DB::table('schedules')->where('scheduleID', $id)->first();
 
         if (!$schedule) {
-            return redirect()->route('admin.schedules.index')
+            return redirect()->route('user.schedules.index')
                            ->with('error', 'Jadwal tidak ditemukan');
         }
 
-        return view('admin.dashboard.schedule.edit', compact('schedule'));
+        return view('user.dashboard.schedule.edit', compact('schedule'));
     }
 
     /**
@@ -228,7 +228,7 @@ class ScheduleController extends Controller
                 'updated_at' => now(),
             ]);
 
-        return redirect()->route('admin.schedules.index')
+        return redirect()->route('user.schedules.index')
                         ->with('success', 'Jadwal berhasil diupdate!');
     }
 
@@ -239,7 +239,7 @@ class ScheduleController extends Controller
     {
         DB::table('schedules')->where('scheduleID', $id)->delete();
 
-        return redirect()->route('admin.schedules.index')
+        return redirect()->route('user.schedules.index')
                         ->with('success', 'Jadwal berhasil dihapus!');
     }
 

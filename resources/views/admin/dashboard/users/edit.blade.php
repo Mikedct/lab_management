@@ -209,7 +209,7 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="password" class="form-label">Password Baru</label>
+                                <label for="password" class="form-label">New Password</label>
                                 <input type="password" 
                                        class="form-control @error('password') is-invalid @enderror" 
                                        id="password" 
@@ -221,7 +221,7 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="password_confirmation" class="form-label">Konfirmasi Password Baru</label>
+                                <label for="password_confirmation" class="form-label">Confirm New Password</label>
                                 <input type="password" 
                                        class="form-control" 
                                        id="password_confirmation" 

@@ -162,12 +162,12 @@
                                         name="day" 
                                         required>
                                     <option value="">Select Day</option>
-                                    <option value="Senin" {{ old('day') == 'Senin' ? 'selected' : '' }}>Senin</option>
-                                    <option value="Selasa" {{ old('day') == 'Selasa' ? 'selected' : '' }}>Selasa</option>
-                                    <option value="Rabu" {{ old('day') == 'Rabu' ? 'selected' : '' }}>Rabu</option>
-                                    <option value="Kamis" {{ old('day') == 'Kamis' ? 'selected' : '' }}>Kamis</option>
-                                    <option value="Jumat" {{ old('day') == 'Jumat' ? 'selected' : '' }}>Jumat</option>
-                                    <option value="Sabtu" {{ old('day') == 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
+                                    <option value="Monday" {{ old('day') == 'Monday' ? 'selected' : '' }}>Monday</option>
+                                    <option value="Tuesday" {{ old('day') == 'Tuesday' ? 'selected' : '' }}>Tuesday</option>
+                                    <option value="Wednesday" {{ old('day') == 'Wednesday' ? 'selected' : '' }}>Wednesday</option>
+                                    <option value="Thursday" {{ old('day') == 'Thursday' ? 'selected' : '' }}>Thursday</option>
+                                    <option value="Friday" {{ old('day') == 'Friday' ? 'selected' : '' }}>Friday</option>
+                                    <option value="Saturday" {{ old('day') == 'Saturday' ? 'selected' : '' }}>Saturday</option>
                                 </select>
                                 @error('day')
                                     <div class="invalid-feedback">{{ $message }}</div>
